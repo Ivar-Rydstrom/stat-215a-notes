@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Setting Up Your Data Science Project – Veridical Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-data_cleaning.html" rel="next">
+<link href="./02-dslc.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-TJTW27Q5D3"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-TJTW27Q5D3', { 'anonymize_ip': true});
+</script>
+</head><body class="nav-sidebar docked nav-fixed"><button type="button" class="btn btn-primary btn-lg bi bi-arrow-up" id="btn-back-to-top"></button>
+
+<style>
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+}
+</style>
+
+<script id="backtotop" type="application/javascript">
+let backToTopButton = document.getElementById("btn-back-to-top");
+
+window.addEventListener('scroll', () => {
+            if (document.body.scrollTop > 20 || 
+document.documentElement.scrollTop > 20) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    });
+
+backToTopButton.addEventListener("click", function () {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+});
+</script>
+<div id="progress-bar" style="width: 0%; height:2px; background-color: 
+rgb(89 127 235);; position: fixed; top: 0px; z-index: 2000;"></div>
+
+<script id="progressbar" type="text/javascript">
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const bar = document.querySelector('#progress-bar');
+    const post = document.querySelector('#quarto-content');
+    const html = document.documentElement;
+    
+    const height = post.scrollHeight + post.offsetTop;
+    
+    window.addEventListener('scroll', () => {
+        bar.style.width = (html.scrollTop / (height- html.clientHeight)) * 
+100 + '%';
+    });
+});
+</script>
+<style>
+  #quarto-sidebar .menu-text {
+    line-height:1.5em;
+
+  }
+</style>
+
+
+<style>
+  #margin-sidebar {
+    line-height:1.5em;
+  }
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class='navbar-brand' href='/'>
+    <span class="navbar-title">Veridical Data Science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://binyu.stat.berkeley.edu/"> 
+<span class="menu-text">Bin Yu</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.rebeccabarter.com"> 
+<span class="menu-text">Rebecca L. Barter</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/Yu-Group/vds-book-supplementary" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href='/01-veridical_ds'><strong>Part I</strong>: <em>An Introduction to Veridical Data Science</em></a></li><li class="breadcrumb-item"><a href='/03-code_reproducibility'><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Setting Up Your Data Science Project</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/'>
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/00-acknowledgements'>
+ <span class="menu-text">Acknowledgments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Part I</strong>: <em>An Introduction to Veridical Data Science</em></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/01-veridical_ds'>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An Introduction to Veridical Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/02-dslc'>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Data Science Life Cycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link active' href='/03-code_reproducibility'>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Setting Up Your Data Science Project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Part II</strong>: <em>Preparing, Exploring, and Describing Data</em></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/04-data_cleaning'>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Preparation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/05-data_viz'>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/06-pca'>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Principal Component Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/07-cluster'>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Part III</strong>: <em>Prediction</em></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/08-prediction_intro'>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">An Introduction to Prediction Problems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/09-ls'>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Continuous Responses and Least Squares</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/10-ls_continued'>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Extending the Least Squares Algorithm</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/11-ls_binary'>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Binary Responses and Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/12-rf'>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees and the Random Forest Algorithm</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/13-final_ml'>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Producing the Final Prediction Results</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/14-conclusion'>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/15-exercise_answers'>
+ <span class="menu-text">Answers to True or False Exercises</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#programming-languages-and-ides" id="toc-programming-languages-and-ides" class="nav-link active" data-scroll-target="#programming-languages-and-ides"><span class="header-section-number">3.1</span> Programming Languages and IDEs</a>
+  <ul class="collapse">
+  <li><a href="#sec-code-guidelines" id="toc-sec-code-guidelines" class="nav-link" data-scroll-target="#sec-code-guidelines"><span class="header-section-number">3.1.1</span> Code Guidelines</a></li>
+  <li><a href="#writing-functions-for-data-cleaning-and-preprocessing" id="toc-writing-functions-for-data-cleaning-and-preprocessing" class="nav-link" data-scroll-target="#writing-functions-for-data-cleaning-and-preprocessing"><span class="header-section-number">3.1.2</span> Writing Functions for Data Cleaning and Preprocessing</a></li>
+  </ul></li>
+  <li><a href="#sec-project-structure" id="toc-sec-project-structure" class="nav-link" data-scroll-target="#sec-project-structure"><span class="header-section-number">3.2</span> A Consistent Project Structure</a>
+  <ul class="collapse">
+  <li><a href="#best-practices-for-working-with-data-files" id="toc-best-practices-for-working-with-data-files" class="nav-link" data-scroll-target="#best-practices-for-working-with-data-files"><span class="header-section-number">3.2.1</span> Best Practices for Working with Data Files</a></li>
+  </ul></li>
+  <li><a href="#sec-reproducibility" id="toc-sec-reproducibility" class="nav-link" data-scroll-target="#sec-reproducibility"><span class="header-section-number">3.3</span> Reproducibility</a>
+  <ul class="collapse">
+  <li><a href="#defining-reproducibility" id="toc-defining-reproducibility" class="nav-link" data-scroll-target="#defining-reproducibility"><span class="header-section-number">3.3.1</span> Defining Reproducibility</a></li>
+  <li><a href="#tips-and-tricks-for-reproducibility" id="toc-tips-and-tricks-for-reproducibility" class="nav-link" data-scroll-target="#tips-and-tricks-for-reproducibility"><span class="header-section-number">3.3.2</span> Tips and Tricks for Reproducibility</a></li>
+  </ul></li>
+  <li><a href="#tools-for-collaboration" id="toc-tools-for-collaboration" class="nav-link" data-scroll-target="#tools-for-collaboration"><span class="header-section-number">3.4</span> Tools for Collaboration</a>
+  <ul class="collapse">
+  <li><a href="#sec-git" id="toc-sec-git" class="nav-link" data-scroll-target="#sec-git"><span class="header-section-number">3.4.1</span> Git and GitHub</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#true-or-false-exercises" id="toc-true-or-false-exercises" class="nav-link" data-scroll-target="#true-or-false-exercises">True or False Exercises</a></li>
+  <li><a href="#conceptual-exercises" id="toc-conceptual-exercises" class="nav-link" data-scroll-target="#conceptual-exercises">Conceptual Exercises</a></li>
+  <li><a href="#coding-exercises" id="toc-coding-exercises" class="nav-link" data-scroll-target="#coding-exercises">Coding Exercises</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Yu-Group/vds-book-supplementary" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href='/01-veridical_ds'><strong>Part I</strong>: <em>An Introduction to Veridical Data Science</em></a></li><li class="breadcrumb-item"><a href='/03-code_reproducibility'><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Setting Up Your Data Science Project</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-workflow-setup" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Setting Up Your Data Science Project</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This is the Open Access web version of Veridical Data Science. A <a href="https://mitpress.mit.edu/9780262049191/veridical-data-science/">print version</a> of this book is published by MIT Press. This work and associated materials are subject to a Creative Commons CC-BY-NC-ND license.</p>
+</div>
+</div>
+</div>
+<p>In this chapter, we will briefly introduce some software principles that will come in handy when it comes to practicing data science. While the technical focus of data science is often on writing code itself, you also need to provide a sensible structure to your data files, analyses, and documentation so your results will be reproducible and your analyses will be as unambiguous as possible.</p>
+<p>Without a well-documented and consistent project structure, your data science project will inevitably end up consisting of a disorganized jumble of files with no clear workflow. The end result is that anyone looking at your work is unlikely to know how to run your code to reproduce your analysis. Even returning to a collection of code files that you wrote yourself can lead to confusion if they are poorly structured and poorly documented. Was it the code in <code>code_v1.R</code> or <code>final_code.qmd</code> that created that particular finding that you liked? Was the result based on the <code>test_scores.csv</code> or the <code>primary_test_scores.csv</code> data file?</p>
+<p>Our goal in this chapter is to help you avoid such scenarios by introducing a consistent workflow and project structure—based on the data science life cycle (DSLC) and predictability, computability, and stability (PCS) principles—that you can use across all your data science projects. We will also offer advice on how to choose a programming language, how to write and document your code and judgment calls, and how to ensure that your analyses are as reproducible as possible (i.e., how to ensure that you will be able to rerun your code at any point in the future and get the same answer).</p>
+<section id="programming-languages-and-ides" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="programming-languages-and-ides"><span class="header-section-number">3.1</span> Programming Languages and IDEs</h2>
+<p>While there are an increasing number of impressive code-free point-and-click data analysis platforms (such as Tableau, Looker, Power BI, and even Microsoft Excel) that allow anyone to perform data analysis without writing any code (or at least, very minimal code), the majority of data scientists still prefer to write their own code to clean, explore, and analyze their data. By writing your own code, you have almost infinite flexibility to implement your own creative data analysis ideas. In contrast, when using point-and-click data analysis software, you are typically limited to the specific set of analysis options provided by whichever platform you are using (although it is worth noting that these platforms are becoming more and more flexible every year, and they are an excellent resource for many people who want to conduct basic data analysis without learning how to code).</p>
+<p>When you write code, you are communicating with your computer, telling it how to interact with—and compute on—your data. But just as there are many languages that humans speak when communicating with one another, there are also many programming languages that we can code with when communicating with computers. There is an ongoing debate as to what is the <em>best</em> programming language for data science, with the two primary contenders (at least for now) being R and Python. Both languages are free to use and are <em>open-source</em>, which means that the underlying source code that makes up these languages is publicly available and can be freely modified by the user. As a result, both languages are constantly evolving due to extensive global communities of programmers who contribute to and improve them.</p>
+<p>Although many data science practitioners will feel otherwise, it is our opinion that (in the context of data science) neither of these languages is universally better than the other. There are, however, some applications for which one language might be preferable over the other. For example, Python has certain features that make it well suited for ML projects, particularly natural language processing (NLP) and image classification problems, while R has a range of excellent packages for statistical analysis and the analysis of medical and biological data (e.g., the vast suite of packages hosted on Bioconductor), and it is particularly well suited for data visualization (e.g., using the ggplot2 package). For most data science applications, however, the two languages are equally competent. That said, it is worth noting that <em>outside of data science</em>, Python is by far the superior language, having broad uses ranging from app development to web development, whereas R is a language that is more specifically tailored to statistical analysis and data science.</p>
+<p>Most statisticians tend to prefer R over Python, whereas most machine learners prefer Python over R. Since we are statistically trained ourselves, we tend to prefer R, but we have a healthy respect for Python (in fact, most people in the Yu research group are comfortable using both languages). The content within the pages of this book is equally applicable to R and Python users, as well as people who code in other languages. The code examples provided for the case studies and examples presented in this book are available for both R and Python. You can find the code in the (<a href="https://github.com/Yu-Group/vds-book-supplementary">supplementary GitHub repository</a>).</p>
+<p>Since we do not teach you how to code in R or Python in this book, if you want to follow along with the code provided online, it will help if you have at least a mild familiarity with your chosen language. If you’ve never programmed in R or Python before, there are many books and online courses that can help, many of which are geared specifically toward learning to use these languages for data analysis. Our primary recommendation for R is “R for Data Science” <span class="citation" data-cites="grolemund_r_2017">(<a href="#ref-grolemund_r_2017" role="doc-biblioref">Grolemund and Wickham 2017</a>)</span>, which can be found online (at <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>). For Python, we recommend “Python for Data Analysis” <span class="citation" data-cites="mckinney_python_2017">(<a href="#ref-mckinney_python_2017" role="doc-biblioref">McKinney 2017</a>)</span>, which can also be found online (at <a href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a>). While it is certainly not necessary to know how to code if you just want to understand the big picture ideas that are presented in this book, if you want to be able to implement them in practice, working through the R or Python code examples provided online will be critical.</p>
+<p>To get started with R, you will first need to visit the <a href="https://cran.r-project.org/">comprehensive R archive network (CRAN) website</a> and select the latest release of R for your system to download and install. We recommend also <a href="https://posit.co/products/open-source/rstudio/">downloading and installing Posit’s RStudio</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> integrated development environment (IDE). For most R users, RStudio is the preferred desktop application for writing and running R code.</p>
+<p>If you plan to instead use Python, the choice of IDE in which you will write and run your Python code will be slightly different. One of the most common IDEs among Python users is the classic Jupyter Notebook IDE, but these days, many Python users are increasingly shifting toward the Visual Studio Code (VS Code) editor application. VS Code is a one-stop-shop that lets you work with Jupyter Notebook files, as well as a range of other file formats. To use Python in either of these IDEs, you will need to install Python. If you plan to use Jupyter Notebooks using the traditional Jupyter IDE, the most common way to install Python is to <a href="https://www.anaconda.com/">install the Anaconda suite</a>, which will not only install Python but also the Jupyter Notebook IDE. If you instead plan to use VS Code (which is our recommendation), it is generally simpler to <a href="https://www.python.org/downloads/">install Python directly from the Python website</a>, and then <a href="https://code.visualstudio.com/">install VS Code</a>. Note that while most R users typically use the RStudio IDE, both Jupyter Notebooks and the VS Code IDE can be used with the R programming language.</p>
+<p>If you cannot (or prefer not to) install software on your machine, you can instead use cloud-based (i.e., web-based) versions of these IDEs, such as JupyterLab, Google Colab (based on Jupyter Notebooks), or VS Code for the web, all of which support both R and Python.</p>
+<section id="sec-code-guidelines" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="sec-code-guidelines"><span class="header-section-number">3.1.1</span> Code Guidelines</h3>
+<p>The following list provides some guidelines for writing clear, concise, and reusable code:</p>
+<ol type="1">
+<li><p><strong>Do not repeat yourself</strong>. Write functions and use map functions (for applying a piece of code iteratively to all the elements of an object) to avoid copying and pasting slight variations of the same piece of code in many places.</p></li>
+<li><p><strong>Follow a consistent style guide</strong>. The code style guide that we recommend for R is called <a href='http://style.tidyverse.org/'>the “tidyverse” style guide</a>, written by Hadley Wickham. This style guide, derived from the original Google R Style Guide, provides detailed instructions for code syntax, including naming variables, using spaces, using indenting, commenting, conventions for writing functions, using pipes (a method for chaining together multiple functions), and more. Most Python users follow the <a href="https://peps.python.org/pep-0008/">PEP8 style guide</a>.</p></li>
+<li><p><strong>Comment liberally</strong>. Explain, via code comments (e.g., using <code>#</code>), why every single piece of code is necessary and what it does.</p></li>
+<li><p><strong>Test your code</strong>. Whenever you write code, be sure to test that it works as you expect. You can write an actual <em>test function</em>, or you can physically check that the output of your code matches what you expect. Get into the habit of thinking about edge cases, where your code might not work as expected.</p></li>
+<li><p><strong>Conduct code review</strong>. Whenever possible, your code should be reviewed by another person to catch bugs (errors) and inconsistencies. When there is no one else around who can review your code for you, you can review your code yourself (you’d be surprised at the number of mistakes you can catch just by rereading your own code!).</p></li>
+</ol>
+</section>
+<section id="writing-functions-for-data-cleaning-and-preprocessing" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="writing-functions-for-data-cleaning-and-preprocessing"><span class="header-section-number">3.1.2</span> Writing Functions for Data Cleaning and Preprocessing</h3>
+<p>While the syntax will differ, the programming languages that you are likely to encounter in data science have the same general form, which involves defining named <strong>objects</strong> that contain (or “point to”) data, and then applying various <strong>functions</strong> (actions) to these objects. Functions are pieces of code that can be reused and applied over and over to different objects without having to write the same code each time. Functions take in an input, such as some data, and return an output, such as a computation on the data or a modified version of the data. Some functions also have <strong>arguments</strong>, which allow you to make slight modifications to the code being run within the function. While each language has built-in functions (such as the <code>mean()</code> function in R, which returns the mean of the numbers provided in the input), you can also write your own custom functions (such as a function that takes your original dataset as its input and returns a cleaned version of the data as its output).</p>
+<p>Recall that part of a thorough PCS analysis of your results involves evaluating how your results change (i.e., how stable they are) when you make alternative judgment calls while cleaning and preprocessing your data. Rather than copying and pasting your data cleaning and preprocessing code with slight modifications to create multiple different versions of your cleaned and preprocessed dataset, we strongly recommend that you write a function that takes in the original, raw data as its input, and returns a cleaned/preprocessed version of the data as the output. By including the data-cleaning and preprocessing judgment calls as arguments to your cleaning and preprocessing functions, it becomes fairly easy to create alternative versions of your data based on alternative judgment calls without having to copy and paste your code multiple times.</p>
+</section>
+</section>
+<section id="sec-project-structure" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-project-structure"><span class="header-section-number">3.2</span> A Consistent Project Structure</h2>
+<p>How should you organize your code files? If you and your collaborators agree to follow (and document) some consistent guidelines for writing code and organizing files, it becomes much easier for both your collaborators and your future self to understand, contribute to, and later reproduce your analyses.</p>
+<p>If you’re using R, we recommend writing your exploration and analysis code in Quarto<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> (<code>.qmd</code>) within RStudio. Quarto files allow you to combine narrative text and code chunks in the same document. A quarto document can be <em>compiled</em> to produce a PDF or HTML report that contains the narrative text and the output of your code (the code itself can either be hidden or shown in the report, based on what kind of audience you will be showing it to). If you’re instead using Python, you will probably be using Jupyter Notebook files instead of Quarto<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, but the two file formats perform a similar function.</p>
+<p>For both R- and Python-based projects, we recommend saving the code for reusable functions (such as functions for data cleaning and preprocessing) in scripts, which are raw code files that do not also include text or output. R scripts have the suffix <code>.R</code> and Python scripts have the suffix <code>.py</code>.</p>
+<p>Let’s take a look at an example of the file structure of a veridical data science project that uses R. In the shaded box that follows, the file/folder hierarchy is displayed using indentation.</p>
+<pre class="rmarkdown"><code>data/
+  data_documentation/
+    codebook.txt
+  data.csv
+dslc_documentation/
+  01_cleaning.qmd
+  02_eda.qmd
+  03_clustering.qmd
+  04_prediction.qmd
+  functions/
+    cleanData.R
+    preProcessData.R
+README.md</code></pre>
+<p>A forward slash, <code>/</code>, indicates a folder (rather than a file). For example, <code>data/</code> is a folder that contains another folder, <code>data_documentation/</code>, and a data file, <code>data.csv</code>. The only difference between the R-based file structure shown here and a version that uses Python instead of R is that the <code>.qmd</code> Quarto files will be <code>.ipynb</code> Jupyter Notebook files and the <code>.R</code> scripts will be <code>.py</code> scripts.</p>
+<p>The two top-level folders are as follows:</p>
+<ol type="1">
+<li><p><strong><code>data/</code></strong>, which contains the raw dataset (e.g., <code>data.csv</code>) and subfolder containing data documentation information (e.g., meta-information and data definitions in the form of codebook).</p></li>
+<li><p><strong><code>dslc_documentation/</code></strong>, which contains a separate <code>.qmd</code> Quarto file (for R) or <code>.ipynb</code> Jupyter Notebook (for Python) for conducting and documenting the code-based explorations and analysis at each stage of the DSLC. Each file name has a numeric prefix to ensure that the files appear in the correct order. There is also a <code>functions/</code> subfolder with the <code>.R</code> (R) or <code>.py</code> (Python) scripts that contain functions that will be used across multiple analysis files.</p></li>
+</ol>
+<p>The <code>README.md</code> file summarizes the file structure of the project and describes what each file contains. If you turn this directory into a GitHub repository (see <a href="#sec-git" class="quarto-xref"><span class="quarto-unresolved-ref">sec-git</span></a>), the contents of this <code>README.md</code> file will be displayed on the repository home page. </p>
+<p>This is just one example of a consistent project structure that you can use for your data science projects, but since most data science projects in the real world do not involve just one person, you will likely need to adapt your project structure to match the preferences and expectations of your team members. The key is for everyone to agree to a particular structure, document it in the <code>README.md</code> file, and be as diligent as possible about adhering to the structure that you agree upon for the duration of the project.</p>
+<p>Let’s introduce some best practices for working with data and writing DSLC documentation code files.</p>
+<section id="best-practices-for-working-with-data-files" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="best-practices-for-working-with-data-files"><span class="header-section-number">3.2.1</span> Best Practices for Working with Data Files</h3>
+<p>Most of the datasets that we consider in this book come in the form of CSV files (“comma-separated” files) in which each measurement in the data is separated by a comma (CSV files have the file type suffix .csv), but there are also many other file types that you are likely to encounter throughout your data science adventures, including JSON and Microsoft Excel files. Wherever possible, unambiguously structured formats such as .csv and JSON are greatly preferred to complex file types, such as Excel, which often have substantial metadata incorporated into them (such as colors, fonts, multiple pages, etc.) that cannot be easily converted into a simple table/data frame. If you will be receiving data from collaborators, an excellent resource to share with them on how to structure the data to make your job as easy as possible is “How to Share Data for Collaboration” <span class="citation" data-cites="ellis_how_2018">(<a href="#ref-ellis_how_2018" role="doc-biblioref">Ellis and Leek 2018</a>)</span>.</p>
+<p>Once you receive your original, raw data file (no matter what format it comes in), it is good practice to avoid manually editing or modifying it. If you absolutely must make any modifications to this raw data file directly (e.g., if you need to delete some preceding rows of text to load it into R or Python), we recommend creating a copy of this raw data file and modifying only the copy, leaving the original version alone.</p>
+<p>Cleaning and preprocessing your data necessarily involves modifying your data, but these modifications should be applied by writing code to modify the data that you have loaded into your programming environment (which should not modify the original, raw data file). However, rather than saving any resulting cleaned/preprocessed versions of the data in your <code>data/</code> folder, we recommend <em>running your code to re-clean the raw data inside your programming environment every time you start a new analysis file</em>. For example, at the beginning of each of your Quarto or Jupyter Notebook analysis files, you may want to include a code chunk/cell that loads and cleans your data (e.g., using a custom data cleaning function that you defined). In R, this might look like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># source the R script that defines our cleanData() function</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"cleanData.R"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load the raw data</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/data.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># clean the data</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>data_clean <span class="ot">&lt;-</span> <span class="fu">cleanData</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There are two reasons for this:</p>
+<ol type="1">
+<li><p>If you had instead written code that cleaned your data and then saved this clean dataset as a new .csv file (e.g., <code>data_clean.csv</code>), it would not be immediately clear from just looking at the data file names what code was used to create this cleaned data file.</p></li>
+<li><p>By re-cleaning your raw data in every analysis file (rather than loading a pre-saved cleaned data file), you are ensuring that you are working with the most up-to-date version of the cleaned data. If, for instance, the raw data gets updated (not likely to happen for projects using “dead” data, but may happen for projects working with “live” data), or if you update your data cleaning code, but you fail to rerun the code that creates and saves your cleaned dataset file, then your downstream results may be based on an outdated dataset or cleaning protocol.</p></li>
+</ol>
+<p>One exception is if your data cleaning procedure takes a long time to run. In this case, you may want to save a cleaned/preprocessed version of the data on your computer and load the clean version (rather than always loading the raw data and then cleaning/preprocessing it in your R/Python session, as is recommended). If you decide to take the route of saving the cleaned/preprocessed data file on your computer, be sure to document how the data was cleaned (e.g., by saving your cleaning code scripts and making a note in your <code>README</code> file about which code was used to create the cleaned data) and ensure that you rerun the cleaning code that produced it regularly (just in case you make changes in your data and cleaning code).</p>
+<p>Recall, however, that in the veridical data science framework, we explicitly acknowledge how our cleaning/preprocessing judgment calls lead to alternative cleaned/preprocessed versions of the data. If you are saving your cleaned/preprocessed data (rather than re-cleaning and preprocessing the raw data in each new R session), you may need to save several alternative versions of your cleaned/preprocessed data and create well-documented naming conventions that make it clear which set of judgment calls correspond to which cleaned/preprocessed data file.</p>
+<section id="big-data-and-databases" class="level4" data-number="3.2.1.1">
+<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="big-data-and-databases"><span class="header-section-number">3.2.1.1</span> Big Data and Databases</h4>
+<p>The data that we use for every project in this book can easily fit and be analyzed on a modern standard laptop, but that is not the case for all datasets. While some people think of data science as synonymous with “big data”, how big does a dataset need to be for it to be considered “big data”? Suppose that you’re trying to evaluate changes in air quality over time. If your data consists of hourly air quality measurements over 10 years at four different locations, then you have <span class="math inline">\(24 \times 365 \times 10 \times 4 = 350,400\)</span> observations, each of which has measurements recorded for a few different variables (such as CO, NO2, PM2.5, and temperature). This might sound like a lot of data, but it is actually small enough that it can be stored comfortably in a .csv file that is less than 1 GB in size and be analyzed with relative ease on the average laptop. We don’t consider data to be truly <em>big</em> until it can no longer be comfortably stored and analyzed on a typical laptop. That is, we define “big” relative to our computational abilities.</p>
+<p>In comparison, consider the data collected from CERN’s Large Hadron Collider (LHC). Particles collide with the LHC approximately 600 million times per second, generating around 30 petabytes (PB) of data annually. Their data center hosts 11,000 servers with 100,000 processor cores, with some 6,000 changes in the database being made <em>every second</em>. Now that’s big data! This setup would require data storage and computing technologies that are far beyond the scope of this book. When data is too big to fit on a laptop, it will probably live in a database that may or may not exist in the <em>cloud</em> (a remote computer that you can connect to and interact with over the internet). To extract data from a database, you typically need to know how to use a programming language called SQL, which is not too hard to learn (especially if you already know how to write R or Python code).</p>
+</section>
+<section id="best-practices-for-dslc-documentation-code-files" class="level4" data-number="3.2.1.2">
+<h4 data-number="3.2.1.2" class="anchored" data-anchor-id="best-practices-for-dslc-documentation-code-files"><span class="header-section-number">3.2.1.2</span> Best Practices for DSLC Documentation Code Files</h4>
+<p>The <code>dslc_documentation/</code> folder contains the code and documentation for the explorations and analysis that you conduct on your data. Rather than just writing commands directly into the RStudio console to analyze your data, we recommend saving your code in a Quarto or Jupyter Notebook file, which will allow your code to live alongside narrative text that provides context. By writing your code and documentation in a Quarto document or Jupyter Notebook, you are keeping a record of the code that you ran (and the order in which it was run) as well as the thought processes and judgment calls that led to your final results.</p>
+<p>An example of a Quarto analysis document is shown in the top-left pane of the RStudio IDE shown in <a href="#fig-quarto" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-quarto</span></a>. In the Quarto document, code is contained within the <em>code chunks</em> (that are surrounded by three backticks), and we are also manually running the code line-by-line in the <em>console</em> in the bottom-left pane. The rendered HTML version of the Quarto document is shown in the right pane.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-quarto" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Figures-External/setup/quarto.jpeg" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: An RStudio session. The top-left pane shows a Quarto document that is being written, which combines narrative text and code (in “code chunks”). The bottom-left pane shows the console in which we manually run the code to see its output, and the right panel shows the compiled HTML file (produced by hitting the Render button with the blue arrow in the RStudio IDE).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In our recommended project structure, the <code>dslc_documentation/</code> folder contains a Quarto (or Jupyter Notebook) file with the code and documentation for each relevant stage of the DSLC. For instance, the file (<code>01_cleaning.qmd</code>) contains the code and explanations for the data cleaning and preprocessing stage of the DSLC, and the file (<code>02_eda.qmd</code>) contains the code and explanations for the EDA of the DSLC. Each quarto or notebook file name is prefixed with a number designed to indicate the order in which each file should be run/read (these numeric prefixes don’t need to match the DSLC stage numbers themselves).</p>
+<p>Reusable functions (such as data cleaning and preprocessing functions) that will be used across multiple Quarto/Jupyter Notebook files can be stored as <code>.R</code> (R) or <code>.py</code> (Python) files in the <code>functions/</code> subfolder of the top-level <code>dslc_documentation/</code> folder.</p>
+<p>For real-world scientific research projects, researchers are encouraged to create an <em>additional</em> detailed documentation file based on the example <strong>PCS documentation</strong> template, which can be found online at <a href="https://yu-group.github.io/vdocs/PCSDoc-Template.html">https://yu-group.github.io/vdocs/PCSDoc-Template.html</a>. This PCS documentation serves as a detailed, code-free summary of the entire project, ranging from problem formulation, data collection, and accessing the data, to the data cleaning procedure implemented (including the judgment calls made), the analyses that were conducted, the results that were obtained, and the PCS evaluations of these results. A major role of the PCS documentation is to provide a summary of the domain knowledge relevant to each stage of the DSLC, and it serves as a record of the critical thinking arguments made throughout the entire DSLC. Note that we won’t be providing complete PCS documentation for the projects in this book (the <code>dslc_documentation/</code> files serve as sufficient documentation).</p>
+</section>
+</section>
+</section>
+<section id="sec-reproducibility" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-reproducibility"><span class="header-section-number">3.3</span> Reproducibility</h2>
+<p>We have used the term “reproducibility” multiple times so far in this chapter, but we have yet to formally define it. Let’s introduce the concept of reproducibility with a cautionary tale.</p>
+<p>In 2010, Carmen Reinhart and Kenneth Rogoff, a pair of Harvard economists famous for their work on the history of financial crises, published a study called “Growth in the Time of Debt” <span class="citation" data-cites="rogoff_growth_2010">(<a href="#ref-rogoff_growth_2010" role="doc-biblioref">Rogoff and Reinhart 2010</a>)</span>, in which they presented an analysis that showed that <em>increasing</em> government debt corresponding to more than 90 percent of gross domestic product (GDP) is associated with a notable <em>decrease</em> in economic growth. That is, the more money a government borrows (e.g., to help fund its economy during a recession), the slower its economy tends to grow. The goal of their study was to use historical economic data to make decisions about today’s economy.</p>
+<p>Reinhart and Rogoff’s finding that increasing debt to more than 90 percent of GDP is not a good approach to dealing with times of economic difficulty quickly became a key selling point across the global economic platform for those who argued for <em>austerity</em>, a strategy in which governments favor lowering living standards (to save money) in times of economic difficulty rather than increasing debt (to get more money) <span class="citation" data-cites="blyth_austerity_2013">(<a href="#ref-blyth_austerity_2013" role="doc-biblioref">Blyth 2013</a>)</span>.</p>
+<p>However, three years after these findings began to have a widespread impact on the global economic stage, Thomas Herndon, a PhD student from the University of Massachusetts Amherst, tried to reproduce their results and couldn’t <span class="citation" data-cites="herndon_does_2014">(<a href="#ref-herndon_does_2014" role="doc-biblioref">Herndon, Ash, and Pollin 2014</a>)</span>. In fact, together with Professors Michael Ash and Robert Pollin, he found the exact opposite result! According to Herndon et al., Reinhart and Rogoff’s original study was plagued with issues that stemmed from a lack of testing, Excel coding errors (e.g., Reinhart and Rogoff’s analysis excluded three data points from New Zealand), and insufficient documentation of the analytic process. As a result, Reinhart and Rogoff’s study was deemed by Herndon to be unreproducible.</p>
+<p>Reinhart and Rogoff’s study is not special in this regard. A notable study <span class="citation" data-cites="camerer_evaluating_2018">(<a href="#ref-camerer_evaluating_2018" role="doc-biblioref">Camerer et al. 2018</a>)</span> tried to replicate 21 systematically selected experimental studies in the social sciences that were published in the prominent <em>Nature</em> and <em>Science</em> journals between 2010 and 2015. However, even though these articles were peer-reviewed and featured in top research journals, the researchers were able to computationally reproduce the results reported in only two-thirds of the studies. Another study, the Reproducibility Project <span class="citation" data-cites="open_science_collaboration_estimating_2015">(<a href="#ref-open_science_collaboration_estimating_2015" role="doc-biblioref">Open Science Collaboration 2015</a>)</span>, tried to reproduce the results from 100 papers published in the field of psychology and was able to reproduce only around one-third of the results. This phenomenon is being called the “reproducibility crisis” in Science <span class="citation" data-cites="begley_reproducibility_2015 baker_1500_2016">(<a href="#ref-begley_reproducibility_2015" role="doc-biblioref">Begley and Ioannidis 2015</a>; <a href="#ref-baker_1500_2016" role="doc-biblioref">Baker 2016</a>)</span>.</p>
+<section id="defining-reproducibility" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="defining-reproducibility"><span class="header-section-number">3.3.1</span> Defining Reproducibility</h3>
+<p>The term <strong>reproducible</strong> has different meanings for different people, but reproducibility is generally intended as a proxy for trustworthiness. In data science, probably the most common definition says that a data-driven result is considered reproducible if you (or anyone else with the appropriate skills) can easily regenerate your results by rerunning the original code that produced it. However, results that are considered reproducible by this definition can certainly still be wrong. If your code contains mistakes (bugs) but it still runs, then you will reproduce the same <em>wrong</em> results every time you run it. We thus consider this definition to correspond to a fairly weak form of reproducibility. (That said, even this weakest form of reproducibility can be hard to achieve, so it is a good starting point.)</p>
+<p>In traditional scientific research, the term “reproducible” is more likely to mean that another research group has collected its own data, conducted its own analysis, and arrived at the same conclusion as the original study. This definition involves a lot more work than the previous one, but it also offers substantially stronger evidence of the trustworthiness of the results.</p>
+<p>Rather than trying to define specific terms for each type of reproducibility (many people have tried to do this, resulting in a jumble of inconsistent terminology—for example, <span class="citation" data-cites="stark_before_2018">Stark (<a href="#ref-stark_before_2018" role="doc-biblioref">2018</a>)</span> and <span class="citation" data-cites="goodman_what_2016">Goodman, Fanelli, and Ioannidis (<a href="#ref-goodman_what_2016" role="doc-biblioref">2016</a>)</span>), we will instead view several types of reproducibility in the context of the PCS framework (in increasing order of the strength of the evidence of trustworthiness that is provided):</p>
+<ul>
+<li><p>The version of reproducibility (popular in data science) that involves demonstrating that the results can be regenerated by rerunning the original code on the same data on the same computer can be thought of as demonstrating the <em>stability</em> of the results to the particular instance of running the code. A slightly stronger version requires that you can rerun the original code on a different computer. This type of reproducibility provides fairly weak evidence of the trustworthiness of the results.</p></li>
+<li><p>The example of Herndon trying to reproduce Reinhart and Rogoff’s results involved trying to reproduce the results using the same data but new code<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> written by a different person. This is an example of reproducibility that corresponds to the <em>stability</em> of the results to the particular code that was written and to the particular person who conducted the analysis. This type of reproducibility provides stronger evidence of the trustworthiness of the results than the previous example.</p></li>
+<li><p>The strongest examples of reproducibility involve an entirely independent team reproducing a result by collecting entirely new data and writing their own code to conduct their own analysis. This can be thought of as both demonstrating the <em>predictability</em> of the results (since it involves demonstrating that the results reemerge in entirely new data) as well as the <em>stability</em> of the results to the underlying data that was collected, to the code that was written, and to the person who wrote the analysis.</p></li>
+</ul>
+<div id="box-reproducibility" class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Box&nbsp;3.1: Reproducibility
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There is no clear definition of what it means for a data-driven result to be reproducible. Instead, there is a spectrum of definitions that range from the weakest (demonstrating that the results reemerge when the original code is rerun on the same computer) to the strongest (demonstrating that the results reemerge when a completely independent group of data scientists collect their own data and write their own code to answer the same question).</p>
+<p>Every form of reproducibility can be viewed as a type of stability assessment (to the data collected, to the code written, to the person who conducted the analysis, etc.) and/or predictability assessment (if re-evaluation involves showing that the results reemerge using new data). You are encouraged to demonstrate the strongest form of reproducibility for which you have the resources (even if this is just demonstrating that your results reemerge when your code is rerun in a fresh R session).</p>
+</div>
+</div>
+<p>Unfortunately, you will rarely have the resources to demonstrate that your results satisfy the strongest forms of reproducibility, but we encourage you to demonstrate as many forms of reproducibility as you have the resources to accomplish. However, be warned that while achieving even this weakest form of reproducibility might seem easy, it is not. If the order in which the code was run to generate the results is not obvious, if there were pieces of code that were run but not saved (e.g., they were run directly in the console or the code was later deleted), or if the results were computed using a particularly old version of R or Python, then the results could look very different (or may not even be computable) when you or someone else try to rerun your code pipeline at a later date.</p>
+</section>
+<section id="tips-and-tricks-for-reproducibility" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="tips-and-tricks-for-reproducibility"><span class="header-section-number">3.3.2</span> Tips and Tricks for Reproducibility</h3>
+<p>To maximize the chance that your results will be reproducible (in the minimal sense of obtaining consistent results every time you rerun your code), we offer the following tips:</p>
+<ul>
+<li><p><strong>Avoid handling raw data or doing manual modifications</strong>. If you made manual modifications to the data file (e.g., deleting some lines of text in the raw data file), but you didn’t clearly describe how and why you did this, it is highly likely that someone else who tries to reproduce your results from the raw data won’t know to conduct this step (or will conduct it incorrectly), which might result in their downstream results differing from yours. If it is absolutely necessary to make manual modifications to your data, you should clearly <em>document</em> what you did.</p></li>
+<li><p><strong>Regularly rerun your code from start to finish in a fresh R/Python session</strong>. This helps catch bugs in your code early.</p></li>
+<li><p><strong>Tidy up your code files</strong>. It is easy to find yourself with a jumble of messy code that doesn’t work when you run it all in order. While it is highly likely that your code and analysis will start messy—especially if you are new to coding—you are encouraged to go back over it and rewrite your code so that it is clearer and more efficient. Be sure to keep a record of all the analyses that you conducted, even if they ended up being dead ends <span class="citation" data-cites="stoudt_principles_2021">(<a href="#ref-stoudt_principles_2021" role="doc-biblioref">Stoudt, Vásquez, and Martinez 2021</a>)</span>.</p></li>
+<li><p><strong>Use version control (e.g., Git)</strong>. A good way of keeping a record of old code is to use version control (e.g., using Git and GitHub, which will be introduced in <a href="#sec-git" class="quarto-xref"><span class="quarto-unresolved-ref">sec-git</span></a>). The nice thing about version control is that if you “committed” (i.e., took a snapshot of) some piece of code and then later deleted or modified it, you can always retrieve it in the future if you change your mind since it will exist forever in the history of your repository. Hosting your project on GitHub is also an excellent way of showcasing your data science skills and fostering collaboration.</p></li>
+<li><p><strong>Document everything</strong>. Since people should be able to understand the analysis that you conducted, and the reasons why you did what you did, documentation is an incredibly important part of conducting reproducible analysis. Documentation comes in many forms, including code comments, the text you write within your Quarto/Jupyter Notebook analysis files, your README files, and if you are conducting a complex research project, perhaps in your PCS documentation as well.</p></li>
+<li><p><strong>Use up-to-date software</strong>. Make sure that you update R/Python and your add-on libraries every few months. This won’t necessarily happen automatically, so if you’re not careful, one day you will wake up and realize that you are using a version of R that is five years out of date and wonder why the new package that you’ve just installed doesn’t work.</p></li>
+</ul>
+</section>
+</section>
+<section id="tools-for-collaboration" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="tools-for-collaboration"><span class="header-section-number">3.4</span> Tools for Collaboration</h2>
+<p>Since most data science projects involve a team of people working together, often on the same files, it is important to have a system in place for collaborating effectively.</p>
+<p>When it comes to producing documentation, reports, or research papers, many software applications can help teams work together simultaneously (rather than emailing different versions of reports back and forth). Google Docs allows simultaneous collaboration on notes and reports, and Overleaf lets you collaborate on LaTeX documents. Google Colab enables collaboration in a Jupyter Notebook. However, arguably the most important place where collaboration in data science takes place is on <strong>GitHub</strong>.</p>
+<p>Unfortunately, GitHub has a bit of a technical learning curve and is not particularly accessible for nontechnical team members (although they will be able to view the files on GitHub, they may find it hard to modify them).</p>
+<section id="sec-git" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="sec-git"><span class="header-section-number">3.4.1</span> Git and GitHub</h3>
+<p><a href="https://git-scm.com/">Git</a> is a piece of software that was developed for conducting <strong>version control</strong>. Its primary task is to keep track of changes that you make to your files locally on your computer without having to save multiple versions. However, it was the advent of the online service <a href="https://github.com/"><strong>GitHub</strong></a>,<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> allowing for the hosting of a “remote” Git repository (“repository” is a fancy way of saying “project folder”) online that turned Git into such a powerful tool for both collaboration <em>and</em> version control. GitHub has fostered a global community in which data scientists and software engineers alike can connect, collaborate, and share code, analyses, and ideas. Most R and Python packages are <strong>open source</strong> as a result of being hosted publicly on GitHub, allowing <em>anyone</em> to fix bugs and contribute features (these contributions must be accepted by the owner of the code). Multiple people can have access to the same repository via GitHub, which contains not only the most recent versions of each file that has been “pushed” (uploaded) but also contains a record of every change that has ever been “committed” to each file. This process is a lot more sophisticated than clunky alternatives such as emailing multiple versions of code files back and forth, but this sophistication comes at the cost of a steep learning curve.</p>
+<p><a href="#fig-github" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-github</span></a> shows an example of a Git repository hosted on GitHub. This repository is for the widely used <code>ggplot2</code> R package, which is a part of the tidyverse suite of packages. Anyone can “fork” this repository (create a personal version of the repository on your own GitHub account) and/or “clone” it (download it to your local machine, such as your laptop), make changes, and, if desired, submit a “pull request” which, if accepted by the repository owner, will be incorporated into the main public version of the repository.</p>
+<div id="fig-github" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-github-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Figures-External/setup/ggplot.jpeg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-github-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: The tidyverse’s ggplot2 GitHub repository.
+</figcaption>
+</figure>
+</div>
+<p>While using Git and GitHub is not strictly mandatory for progressing through this book, if you’re hoping to eventually get a job as a data scientist, Git and GitHub will be important to know. Moreover, GitHub can be used as a portfolio to showcase your projects and present some real evidence of your skills!</p>
+<p>For further information on Git and GitHub, some additional resources include Roger Dudler’s website <a href="https://rogerdudler.github.io/git-guide">“Git—the simple guide”</a>; the Udacity course <a href="https://www.udacity.com/course/version-control-with-git--ud123">“Version Control with Git,”</a> created by Google, AT&amp;T, and Lyft and led by Caroline Buckey and Sarah Spikes; and the <a href="https://swcarpentry.github.io/git-novice/">Git and GitHub notes from Software Carpentry</a>.</p>
+<p>To practice your Git and GitHub skills, we recommend that you create a unique GitHub repository for each of the projects that you complete in this book and use GitHub to share your analysis with the world so that your GitHub account can serve as a portfolio for showcasing your data analysis talents. As a reminder, the code for each project in this book can be found on the <a href="https://github.com/Yu-Group/vds-book-supplementary">GitHub repository</a>.</p>
+</section>
+</section>
+<section id="exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="true-or-false-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="true-or-false-exercises">True or False Exercises</h3>
+<p>For each question, specify whether the answer is true or false (briefly justify your answers).</p>
+<ol type="1">
+<li><p>Your <code>dslc_documentation</code> files can contain code.</p></li>
+<li><p>It is OK to modify your original raw data file if you document the edits that you made.</p></li>
+<li><p>It is bad practice to rerun the code that cleans your data.</p></li>
+<li><p>R is better than Python for data science.</p></li>
+<li><p>The term “reproducibility” is defined as being able to reproduce the same results on alternative data.</p></li>
+<li><p>The “reproducibility crisis” is a problem unique to data science, and is not an issue in traditional scientific fields.</p></li>
+<li><p>A good technique for increasing the reproducibility of your results (in the context of ensuring that you get the same results every time you run it) is to rerun your code from scratch often.</p></li>
+<li><p>If someone else cannot reproduce your results (based on any definition of reproducibility), then your results must be wrong.</p></li>
+<li><p>If someone else manages to reproduce your results (using their own independent data and by conducting their own analyses), then this proves that your results are correct.</p></li>
+</ol>
+</section>
+<section id="conceptual-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="conceptual-exercises">Conceptual Exercises</h3>
+<ol start="10" type="1">
+<li><p>What is the purpose of the <code>dslc_documentation/</code> folder in our recommended project structure?</p></li>
+<li><p>Describe two techniques that help you to write clear, concise, and reusable code.</p></li>
+<li><p>How would you frame the reproducibility analysis that Herndon and his collaborators conducted in their reevaluation of Reinhart and Rogoff’s results as a stability analysis?</p></li>
+<li><p>One form of reproducibility evaluation involves rewriting your own code from scratch.</p>
+<ol type="a">
+<li><p>How would you frame this as a stability analysis?</p></li>
+<li><p>Does this approach provide stronger or weaker evidence of trustworthiness than the approach used by Herndon?</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="coding-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="coding-exercises">Coding Exercises</h3>
+<p>The following exercises are designed to help you get set up with Git and GitHub for this book, but they are not a substitute for a thorough GitHub tutorial. If you have trouble with these exercises, we recommend consulting some of the additional Git/GitHub resources that are listed in this chapter. These exercises assume that you know what we mean by “the terminal,” and that you have some basic knowledge of how to use it.</p>
+<ol start="14" type="1">
+<li><p>Download and install Git from <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a>.</p></li>
+<li><p>Set up a GitHub account at <a href="https://github.com/">https://github.com/</a>. Note that you will need to set up a Personal Access Token (PAT) on GitHub to use as a password in order to connect your local Git repositories to your remote GitHub repositories.</p></li>
+<li><p>This exercise walks you through cloning the Veridical Data Science GitHub repository, which can be found at <a href="https://github.com/Yu-Group/vds-book-supplementary">https://github.com/Yu-Group/vds-book-supplementary</a>, to create a local version of it on your computer.</p>
+<ol type="a">
+<li><p>Navigate in your terminal (using <code>cd</code>) to where you want the veridical data science folder that you’re about to download to be saved on your computer.</p></li>
+<li><p>Type: <code>git clone https://github.com/Yu-Group/vds-book-supplementary</code> in your terminal (you’ll need to be connected to the internet). This will download the files from the GitHub repository into the local directory on your computer.</p></li>
+</ol></li>
+<li><p>This exercise involves creating a remote GitHub repository online and a local Git repository on your computer and linking them together (setting the online repository as the “remote origin” of the local repository). This will allow you to “push” and “pull” (sync) file changes.</p>
+<ol type="a">
+<li><p><strong>Create a local <code>first_project</code> folder on your computer</strong>. In your terminal, create a local folder on your computer called <code>first_project</code> (<code>mkdir first_project</code>) and navigate into it (<code>cd first_project</code>).</p></li>
+<li><p><strong>Create a <code>First-Project</code> remote repository online on GitHub</strong>. On the GitHub website, make sure that you are logged in and navigate to <a href="https://github.com/new">https://github.com/new</a> to create your first repository on GitHub called <code>First-Project</code> (no need to change any settings). Don’t close the window after you hit “Create Repository,” since you will need to copy the code that is printed beneath “<em>… or create a new repository on the command line</em>!”</p></li>
+<li><p><strong>Turn your local <code>first_project</code> folder into a Git repository and connect it to your <code>First-Project</code> remote repository on GitHub</strong>. In the terminal on your computer, paste the code that you copied from underneath the text “<em>… or create a new repository on the command line</em>”, highlighted in the following image. (Note that if you’re manually copying from this image, you will need to replace <code>rlbarter</code> with your own GitHub username.) <img src="Figures-External/setup/git_copy.jpeg" class="img-fluid" alt="The screen immediately after creating a remote GitHub repository."></p></li>
+<li><p><strong>Add a file to a local Git repository and upload it to the remote GitHub repo</strong>. In the terminal on your computer, create a text document in your local <code>first_project</code> folder called <code>file.txt</code> that contains the text “I’m a text file” (<code>echo "I'm a text file" &gt;&gt; file.txt</code>), and confirm that the file has been created by typing <code>ls</code>.</p>
+<p>Next, add the file to the local Git repository (<code>git add file.txt</code>) and commit it (<code>git commit -m "Created text file"</code>). Push to your “First-Project” remote repository (<code>git push</code>). Confirm that the file has been uploaded to your online repository by refreshing the GitHub page containing your “First-Project” repository and verifying that it now contains the “file.txt” file, just like the image shown here (but with your username instead of “rlbarter”). <img src="Figures-External/setup/git_text_file.jpeg" class="img-fluid" alt="The First-Project GitHub repository containing the file.txt file."></p></li>
+<li><p><strong>Make a change to the local file and add the change to the remote GitHub repo</strong>. Make a change to the file locally (e.g., add some more text), and then add this change (<code>git add file.txt</code>), commit it (<code>git commit -m "Edited text file"</code>), and push it to your “First-Project” remote repository (<code>git push</code>).</p></li>
+</ol></li>
+</ol>
+<p>If you managed to complete this exercise, congratulations! You’ve just set up your first Git repository, added a file, made a modification, and had those changes reflected in an online version of your repository. This is a workflow that you can use to host your own projects in an online GitHub repository (once you’ve created a repository, you can repeat the final step of the exercise to add new files and update existing files).</p>
+<p>Note that any changes you make to the <code>README.md</code> file (if you add, commit, and push the changes) will be reflected on the repository home page on GitHub. If multiple people are editing the same repository you always need to pull new changes from the online repo into your local machine (<code>git pull</code>) before pushing your changes to avoid creating conflicts.</p>
+<p>If you’re new to Git and GitHub, you will inevitably find yourself in unfamiliar territory with no idea what’s going on. That’s normal. We’ve all been there. Our advice is to always keep a copy of your work in these early stages (and when all else fails, delete the repository and start again). You’ll get the hang of it eventually!</p>
+</section>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-baker_1500_2016" class="csl-entry" role="listitem">
+Baker, Monya. 2016. <span>“1,500 Scientists Lift the Lid on Reproducibility.”</span> <em>Nature News</em> 533 (7604): 452–54.
+</div>
+<div id="ref-begley_reproducibility_2015" class="csl-entry" role="listitem">
+Begley, C. Glenn, and John P. A Ioannidis. 2015. <span>“Reproducibility in Science.”</span> <em>Circulation Research</em> 116 (1): 116–26.
+</div>
+<div id="ref-blyth_austerity_2013" class="csl-entry" role="listitem">
+Blyth, Mark. 2013. <em>Austerity: <span>The</span> <span>History</span> of a <span>Dangerous</span> <span>Idea</span></em>. Oxford University Press.
+</div>
+<div id="ref-camerer_evaluating_2018" class="csl-entry" role="listitem">
+Camerer, Colin F., Anna Dreber, Felix Holzmeister, Teck-Hua Ho, Jürgen Huber, Magnus Johannesson, Michael Kirchler, et al. 2018. <span>“Evaluating the Replicability of Social Science Experiments in <span>Nature</span> and <span>Science</span> Between 2010 and 2015.”</span> <em>Nature Human Behaviour</em> 2 (9): 637–44.
+</div>
+<div id="ref-ellis_how_2018" class="csl-entry" role="listitem">
+Ellis, Shannon E., and Jeffrey T. Leek. 2018. <span>“How to Share Data for Collaboration.”</span> <em>The American Statistician</em> 72 (1): 53–57.
+</div>
+<div id="ref-goodman_what_2016" class="csl-entry" role="listitem">
+Goodman, Steven N., Daniele Fanelli, and John P. A. Ioannidis. 2016. <span>“What Does Research Reproducibility Mean?”</span> <em>Science Translational Medicine</em> 8 (341): 341.
+</div>
+<div id="ref-grolemund_r_2017" class="csl-entry" role="listitem">
+Grolemund, Garrett, and Hadley Wickham. 2017. <em>R for <span>Data</span> <span>Science</span>: <span>Import</span>, <span>Tidy</span>, <span>Transform</span>, <span>Visualize</span>, and <span>Model</span> <span>Data</span></em>. O’Reilly Media.
+</div>
+<div id="ref-herndon_does_2014" class="csl-entry" role="listitem">
+Herndon, Thomas, Michael Ash, and Robert Pollin. 2014. <span>“Does High Public Debt Consistently Stifle Economic Growth? <span>A</span> Critique of <span>Reinhart</span> and <span>Rogoff</span>.”</span> <em>Cambridge Journal of Economics</em> 38 (2): 257–79.
+</div>
+<div id="ref-mckinney_python_2017" class="csl-entry" role="listitem">
+McKinney, Wes. 2017. <em>Python for <span>Data</span> <span>Analysis</span>: <span>Data</span> <span>Wrangling</span> with <span>Pandas</span>, <span>NumPy</span>, and <span>IPython</span></em>. O’Reilly Media, Inc.
+</div>
+<div id="ref-open_science_collaboration_estimating_2015" class="csl-entry" role="listitem">
+Open Science Collaboration, Multiple Authors. 2015. <span>“Estimating the Reproducibility of Psychological Science.”</span> <em>Science</em> 349 (6251).
+</div>
+<div id="ref-rogoff_growth_2010" class="csl-entry" role="listitem">
+Rogoff, Kenneth, and Carmen M. Reinhart. 2010. <span>“Growth in a Time of Debt.”</span> <em>American Economic Review: Papers &amp; Proceedings</em> 100 (100): 573–78.
+</div>
+<div id="ref-stark_before_2018" class="csl-entry" role="listitem">
+Stark, Philip B. 2018. <span>“Before Reproducibility Must Come Preproducibility.”</span> <em>Nature</em> 557 (7707): 613.
+</div>
+<div id="ref-stoudt_principles_2021" class="csl-entry" role="listitem">
+Stoudt, Sara, Váleri N. Vásquez, and Ciera C. Martinez. 2021. <span>“Principles for Data Analysis Workflows.”</span> <em>PLOS Computational Biology</em> 17 (3): e1008770.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>RStudio, the company, changed its name to Posit in 2022, but the IDE is still called RStudio (for now, at least).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Quarto is a more flexible and customizable version of R Markdown. We use Quarto for the projects in this book, but you can easily use R Markdown files instead.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>You can also use Quarto for Python, but Quarto is less common than Jupyter Notebooks for Python.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>This example involved conducting an analysis within Excel, so we hesitate to use the word “code” here.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Alternatives to GitHub include GitLab and Bitbucket.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a aria-label='The Data Science Life Cycle' class='pagination-link' href='/02-dslc'>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Data Science Life Cycle</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a aria-label='Data Preparation' class='pagination-link' href='/04-data_cleaning'>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Preparation</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class='nav-link' href='/license'>
+<p>License</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Yu-Group/vds-book-supplementary" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

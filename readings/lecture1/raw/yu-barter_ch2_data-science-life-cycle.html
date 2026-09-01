@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; The Data Science Life Cycle – Veridical Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03-code_reproducibility.html" rel="next">
+<link href="./01-veridical_ds.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-TJTW27Q5D3"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-TJTW27Q5D3', { 'anonymize_ip': true});
+</script>
+</head><body class="nav-sidebar docked nav-fixed"><button type="button" class="btn btn-primary btn-lg bi bi-arrow-up" id="btn-back-to-top"></button>
+
+<style>
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+}
+</style>
+
+<script id="backtotop" type="application/javascript">
+let backToTopButton = document.getElementById("btn-back-to-top");
+
+window.addEventListener('scroll', () => {
+            if (document.body.scrollTop > 20 || 
+document.documentElement.scrollTop > 20) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    });
+
+backToTopButton.addEventListener("click", function () {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+});
+</script>
+<div id="progress-bar" style="width: 0%; height:2px; background-color: 
+rgb(89 127 235);; position: fixed; top: 0px; z-index: 2000;"></div>
+
+<script id="progressbar" type="text/javascript">
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const bar = document.querySelector('#progress-bar');
+    const post = document.querySelector('#quarto-content');
+    const html = document.documentElement;
+    
+    const height = post.scrollHeight + post.offsetTop;
+    
+    window.addEventListener('scroll', () => {
+        bar.style.width = (html.scrollTop / (height- html.clientHeight)) * 
+100 + '%';
+    });
+});
+</script>
+<style>
+  #quarto-sidebar .menu-text {
+    line-height:1.5em;
+
+  }
+</style>
+
+
+<style>
+  #margin-sidebar {
+    line-height:1.5em;
+  }
+</style>
+
+
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class='navbar-brand' href='/'>
+    <span class="navbar-title">Veridical Data Science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://binyu.stat.berkeley.edu/"> 
+<span class="menu-text">Bin Yu</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.rebeccabarter.com"> 
+<span class="menu-text">Rebecca L. Barter</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/Yu-Group/vds-book-supplementary" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href='/01-veridical_ds'><strong>Part I</strong>: <em>An Introduction to Veridical Data Science</em></a></li><li class="breadcrumb-item"><a href='/02-dslc'><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Data Science Life Cycle</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/'>
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/00-acknowledgements'>
+ <span class="menu-text">Acknowledgments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Part I</strong>: <em>An Introduction to Veridical Data Science</em></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/01-veridical_ds'>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An Introduction to Veridical Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link active' href='/02-dslc'>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Data Science Life Cycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/03-code_reproducibility'>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Setting Up Your Data Science Project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Part II</strong>: <em>Preparing, Exploring, and Describing Data</em></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/04-data_cleaning'>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Preparation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/05-data_viz'>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/06-pca'>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Principal Component Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/07-cluster'>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Part III</strong>: <em>Prediction</em></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/08-prediction_intro'>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">An Introduction to Prediction Problems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/09-ls'>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Continuous Responses and Least Squares</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/10-ls_continued'>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Extending the Least Squares Algorithm</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/11-ls_binary'>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Binary Responses and Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/12-rf'>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees and the Random Forest Algorithm</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/13-final_ml'>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Producing the Final Prediction Results</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/14-conclusion'>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/15-exercise_answers'>
+ <span class="menu-text">Answers to True or False Exercises</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-terminology" id="toc-data-terminology" class="nav-link active" data-scroll-target="#data-terminology"><span class="header-section-number">2.1</span> Data Terminology</a></li>
+  <li><a href="#dslc-stage-1-problem-formulation-and-data-collection" id="toc-dslc-stage-1-problem-formulation-and-data-collection" class="nav-link" data-scroll-target="#dslc-stage-1-problem-formulation-and-data-collection"><span class="header-section-number">2.2</span> DSLC Stage 1: Problem Formulation and Data Collection</a>
+  <ul class="collapse">
+  <li><a href="#formulating-a-question" id="toc-formulating-a-question" class="nav-link" data-scroll-target="#formulating-a-question"><span class="header-section-number">2.2.1</span> Formulating a Question</a></li>
+  <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection"><span class="header-section-number">2.2.2</span> Data Collection</a></li>
+  <li><a href="#making-a-plan-for-evaluating-predictability" id="toc-making-a-plan-for-evaluating-predictability" class="nav-link" data-scroll-target="#making-a-plan-for-evaluating-predictability"><span class="header-section-number">2.2.3</span> Making a Plan for Evaluating Predictability</a></li>
+  </ul></li>
+  <li><a href="#dslc-stage-2-data-cleaning-and-exploratory-data-analysis" id="toc-dslc-stage-2-data-cleaning-and-exploratory-data-analysis" class="nav-link" data-scroll-target="#dslc-stage-2-data-cleaning-and-exploratory-data-analysis"><span class="header-section-number">2.3</span> DSLC Stage 2: Data Cleaning and Exploratory Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning"><span class="header-section-number">2.3.1</span> Data Cleaning</a></li>
+  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link" data-scroll-target="#preprocessing"><span class="header-section-number">2.3.2</span> Preprocessing</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><span class="header-section-number">2.3.3</span> Exploratory Data Analysis</a></li>
+  <li><a href="#data-snooping-and-pcs" id="toc-data-snooping-and-pcs" class="nav-link" data-scroll-target="#data-snooping-and-pcs"><span class="header-section-number">2.3.4</span> Data Snooping and PCS</a></li>
+  </ul></li>
+  <li><a href="#dslc-stage-3-uncovering-intrinsic-data-structures" id="toc-dslc-stage-3-uncovering-intrinsic-data-structures" class="nav-link" data-scroll-target="#dslc-stage-3-uncovering-intrinsic-data-structures"><span class="header-section-number">2.4</span> DSLC Stage 3: Uncovering Intrinsic Data Structures</a></li>
+  <li><a href="#dslc-stage-4-predictive-andor-inferential-analysis" id="toc-dslc-stage-4-predictive-andor-inferential-analysis" class="nav-link" data-scroll-target="#dslc-stage-4-predictive-andor-inferential-analysis"><span class="header-section-number">2.5</span> DSLC Stage 4: Predictive and/or Inferential Analysis</a>
+  <ul class="collapse">
+  <li><a href="#prediction" id="toc-prediction" class="nav-link" data-scroll-target="#prediction"><span class="header-section-number">2.5.1</span> Prediction</a></li>
+  <li><a href="#data-driven-inference" id="toc-data-driven-inference" class="nav-link" data-scroll-target="#data-driven-inference"><span class="header-section-number">2.5.2</span> Data-Driven Inference</a></li>
+  </ul></li>
+  <li><a href="#sec-dslc-validation" id="toc-sec-dslc-validation" class="nav-link" data-scroll-target="#sec-dslc-validation"><span class="header-section-number">2.6</span> DSLC Stage 5: Evaluation of Results</a></li>
+  <li><a href="#dslc-stage-6-communication-of-results-and-updating-domain-knowledge" id="toc-dslc-stage-6-communication-of-results-and-updating-domain-knowledge" class="nav-link" data-scroll-target="#dslc-stage-6-communication-of-results-and-updating-domain-knowledge"><span class="header-section-number">2.7</span> DSLC Stage 6: Communication of Results and Updating Domain Knowledge</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#true-or-false-exercises" id="toc-true-or-false-exercises" class="nav-link" data-scroll-target="#true-or-false-exercises">True or False Exercises</a></li>
+  <li><a href="#conceptual-exercises" id="toc-conceptual-exercises" class="nav-link" data-scroll-target="#conceptual-exercises">Conceptual Exercises</a></li>
+  <li><a href="#reading-exercises" id="toc-reading-exercises" class="nav-link" data-scroll-target="#reading-exercises">Reading Exercises</a></li>
+  <li><a href="#coding-exercises" id="toc-coding-exercises" class="nav-link" data-scroll-target="#coding-exercises">Coding Exercises</a></li>
+  <li><a href="#case-study-exercises" id="toc-case-study-exercises" class="nav-link" data-scroll-target="#case-study-exercises">Case Study Exercises</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Yu-Group/vds-book-supplementary" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href='/01-veridical_ds'><strong>Part I</strong>: <em>An Introduction to Veridical Data Science</em></a></li><li class="breadcrumb-item"><a href='/02-dslc'><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Data Science Life Cycle</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-dslc" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Data Science Life Cycle</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This is the Open Access web version of Veridical Data Science. A <a href="https://mitpress.mit.edu/9780262049191/veridical-data-science/">print version</a> of this book is published by MIT Press. This work and associated materials are subject to a Creative Commons CC-BY-NC-ND license.</p>
+</div>
+</div>
+</div>
+<p>Every data science project progresses through some combination of the following stages of the <strong>data science life cycle (DSLC)</strong> (<a href="#fig-ds-cycle" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ds-cycle</span></a>):</p>
+<ol type="1">
+<li><p>Domain problem formulation and data collection</p></li>
+<li><p>Data cleaning, preprocessing, and exploratory data analysis</p></li>
+<li><p>Exploration of intrinsic data structures (dimensionality reduction and clustering)</p></li>
+<li><p>Predictive and/or inferential analysis</p></li>
+<li><p>Evaluation of results</p></li>
+<li><p>Communication of results</p></li>
+</ol>
+<p>While almost every data science project will pass through stages 1–2 and 5–6, not every project will involve stages 3–4. Whether your project includes these stages will depend on the question that you are asking.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ds-cycle" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ds-cycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Figures-External/intro/data_science_life_cycle.png" style="width:5.5in;height:4in" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ds-cycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: The DSLC. Stage 1 involves identifying a domain problem, formulating a relevant question, and collecting data. Stage 2 involves cleaning, preprocessing, and exploring the data. Stage 3 (optional) involves exploring the intrinsic structure of the data. Stage 4 (optional) involves training algorithms or conducting inferential analysis. Stage 5 involves evaluating the results. Stage 6 involves communicating the findings and updating the domain knowledge with what was learned.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="box-dslc" class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Box&nbsp;2.1: The Data Science Life Cycle (DSLC)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The DSLC outlines the stages of a data science project, ranging from problem formulation and data collection to data cleaning, data analysis, and the evaluation and communication of results.</p>
+</div>
+</div>
+<p>Although your project must pass through the first two stages of the DSLC before proceeding to the later stages, you will frequently find yourself returning to—and refining—these early stages as you progress. That is, the DSLC is not a strict <em>linear</em> process. In this chapter, we will provide a summary of each stage of the DSLC presented in <a href="#fig-ds-cycle" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ds-cycle</span></a>, which will set the scene for the rest of this book. Part II of this book will focus on stages 2 and 3 of the DSLC, and part III will focus on predictive analysis—that is, stage 4 of the DSLC (note that we do not cover inferential analysis in this book). The final stages of evaluating and communicating results will be interspersed throughout the book.</p>
+<section id="data-terminology" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="data-terminology"><span class="header-section-number">2.1</span> Data Terminology</h2>
+<p>So far, we have only talked about “data” in the abstract. Before we introduce the stages of the DSLC, let’s look at an example of some actual data and introduce the data terminology that we will be using throughout this book. <a href="#tbl-govt-spending" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-govt-spending</span></a> presents a small dataset containing information on the annual US government spending and budgeting (in billions) for research and development (R&amp;D), with explicit spending amounts provided for climate and energy.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="cell">
+<div id="tbl-govt-spending" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-govt-spending-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: US government research and development budget and spending (reported in millions USD). The columns correspond to the year, the budget, the total spending, the spending on climate, the spending on energy, and the political party in office
+</figcaption>
+<div aria-describedby="tbl-govt-spending-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Year</th>
+<th style="text-align: left;">Budget</th>
+<th style="text-align: left;">Total</th>
+<th style="text-align: left;">Climate</th>
+<th style="text-align: left;">Energy</th>
+<th style="text-align: left;">Party</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">142,299</td>
+<td style="text-align: left;">1,789,000</td>
+<td style="text-align: left;">2,312</td>
+<td style="text-align: left;">13,350</td>
+<td style="text-align: left;">Democrat</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2001</td>
+<td style="text-align: left;">153,197</td>
+<td style="text-align: left;">1,862,800</td>
+<td style="text-align: left;">2,313</td>
+<td style="text-align: left;">14,511</td>
+<td style="text-align: left;">Republican</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">170,354</td>
+<td style="text-align: left;">2,010,900</td>
+<td style="text-align: left;">2,195</td>
+<td style="text-align: left;">14,718</td>
+<td style="text-align: left;">Republican</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2003</td>
+<td style="text-align: left;">192,010</td>
+<td style="text-align: left;">2,159,900</td>
+<td style="text-align: left;">2,689</td>
+<td style="text-align: left;">15,043</td>
+<td style="text-align: left;">Republican</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2004</td>
+<td style="text-align: left;">199,104</td>
+<td style="text-align: left;">2,292,800</td>
+<td style="text-align: left;">2,484</td>
+<td style="text-align: left;">15,343</td>
+<td style="text-align: left;">Republican</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2005</td>
+<td style="text-align: left;">200,099</td>
+<td style="text-align: left;">2,472,000</td>
+<td style="text-align: left;">2,284</td>
+<td style="text-align: left;">14,717</td>
+<td style="text-align: left;">Republican</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">199,429</td>
+<td style="text-align: left;">2,655,000</td>
+<td style="text-align: left;">2,004</td>
+<td style="text-align: left;">14,194</td>
+<td style="text-align: left;">Republican</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2007</td>
+<td style="text-align: left;">201,827</td>
+<td style="text-align: left;">2,728,700</td>
+<td style="text-align: left;">2,044</td>
+<td style="text-align: left;">14,656</td>
+<td style="text-align: left;">Republican</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2008</td>
+<td style="text-align: left;">200,857</td>
+<td style="text-align: left;">2,982,500</td>
+<td style="text-align: left;">2,069</td>
+<td style="text-align: left;">15,298</td>
+<td style="text-align: left;">Republican</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2009</td>
+<td style="text-align: left;">201,275</td>
+<td style="text-align: left;">3,517,700</td>
+<td style="text-align: left;">2,346</td>
+<td style="text-align: left;">16,492</td>
+<td style="text-align: left;">Democrat</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2010</td>
+<td style="text-align: left;">204,556</td>
+<td style="text-align: left;">3,457,100</td>
+<td style="text-align: left;">2,512</td>
+<td style="text-align: left;">17,071</td>
+<td style="text-align: left;">Democrat</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2011</td>
+<td style="text-align: left;">194,256</td>
+<td style="text-align: left;">3,603,100</td>
+<td style="text-align: left;">2,736</td>
+<td style="text-align: left;">16,399</td>
+<td style="text-align: left;">Democrat</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2012</td>
+<td style="text-align: left;">188,944</td>
+<td style="text-align: left;">3,536,900</td>
+<td style="text-align: left;">2,695</td>
+<td style="text-align: left;">16,215</td>
+<td style="text-align: left;">Democrat</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2013</td>
+<td style="text-align: left;">172,121</td>
+<td style="text-align: left;">3,454,600</td>
+<td style="text-align: left;">2,501</td>
+<td style="text-align: left;">15,616</td>
+<td style="text-align: left;">Democrat</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2014</td>
+<td style="text-align: left;">175,383</td>
+<td style="text-align: left;">3,506,100</td>
+<td style="text-align: left;">2,538</td>
+<td style="text-align: left;">17,113</td>
+<td style="text-align: left;">Democrat</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2015</td>
+<td style="text-align: left;">174,608</td>
+<td style="text-align: left;">3,688,400</td>
+<td style="text-align: left;">2,524</td>
+<td style="text-align: left;">19,378</td>
+<td style="text-align: left;">Democrat</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2016</td>
+<td style="text-align: left;">185,885</td>
+<td style="text-align: left;">3,852,600</td>
+<td style="text-align: left;">2,609</td>
+<td style="text-align: left;">20,134</td>
+<td style="text-align: left;">Democrat</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2017</td>
+<td style="text-align: left;">163,606</td>
+<td style="text-align: left;">3,981,600</td>
+<td style="text-align: left;">2,800</td>
+<td style="text-align: left;">19,595</td>
+<td style="text-align: left;">Republican</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Each <em>column</em> of a data table (also referred to simply as the “data” or a “dataset”) corresponds to a different type of measurement and these are called the <strong>variables</strong>, <strong>features</strong>, <strong>attributes</strong>, or <strong>covariates</strong> of the data (in this book, we use these terms interchangeably to refer to the columns). Each variable in a dataset typically has one of the following types:</p>
+<ul>
+<li><p><em>Numeric</em>: A continuous value (e.g., spending amount), a duration (e.g., the number of seconds that a patient can balance on one foot, or the amount of time that a visitor spends on your website), a count (e.g., the number of visitors to your website in a prespecified period, the number of animals that are observed in a particular location), etc.</p></li>
+<li><p><em>Categorical</em>: A set of finite/fixed groups or categories with a predetermined set of options such as political party, hospital department, country, genre, etc.</p></li>
+<li><p><em>Dates and times</em>: Dates and times can come in many different formats, such as “01/01/2020 23:00:05” or “Jan 1 2020.”</p></li>
+<li><p><em>Structured (short) text</em>: Text with a prespecified structure or length, such as a person’s name, a mail address, an email address, etc.</p></li>
+<li><p><em>Unstructured (long) text</em>: A larger body of text that doesn’t have a predefined structure such as entries in pathology reports or doctor’s notes, movie reviews, tweets, posts on Reddit, etc.</p></li>
+</ul>
+<p>The data in <a href="#tbl-govt-spending" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-govt-spending</span></a> contains numeric and categorical features (we are treating the “year” variable as a numeric feature, but it could be considered a date feature).</p>
+<p>The <strong>dimension</strong> of the data refers to the number of variables (columns) that it contains (and sometimes also the number of rows that it contains). So “high-dimensional data” typically refers to data that has a lot of variables (typically more than 100, but there is no set cutoff after which data becomes “high-dimensional”). The government spending data in <a href="#tbl-govt-spending" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-govt-spending</span></a> is six-dimensional, which is <em>not</em> considered to be high-dimensional.</p>
+<p>Each row corresponds to a particular <strong>observation</strong>, <strong>observational unit</strong>, <strong>data unit</strong>, or <strong>data point</strong> (we use these terms interchangeably). These are the entities for which the measurements are collected. Observational units are often countries or people, but in the case of <a href="#tbl-govt-spending" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-govt-spending</span></a>, the observational units are <em>years</em>. Observational units can also be a combination, such as countries and years (if measurements are taken for each country <em>and</em> each year). Each cell/entry in the table contains the value of a particular variable for an individual observational unit.</p>
+<p>This format, in which the data is arranged into columns (features/variables) and rows (observational units), is called <strong>rectangular</strong> or <strong>tabular</strong> data. While some data types—such as text and images—might at first glance seem to be fundamentally nonrectangular, they can often be converted to rectangular formats to which the rectangular-data-based techniques and approaches that you will find in this book can be applied.</p>
+<p>The rest of this chapter summarizes each of the six stages of the DSLC.</p>
+</section>
+<section id="dslc-stage-1-problem-formulation-and-data-collection" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="dslc-stage-1-problem-formulation-and-data-collection"><span class="header-section-number">2.2</span> DSLC Stage 1: Problem Formulation and Data Collection</h2>
+<section id="formulating-a-question" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="formulating-a-question"><span class="header-section-number">2.2.1</span> Formulating a Question</h3>
+<p>The first stage of the DSLC involves collaborating with domain experts to reformulate a domain question into one that can be answered using available data. This might seem straightforward, but it is very common for the initial domain question to be unintentionally vague or unanswerable. The key is to narrow down the overall <em>goal</em> of the domain experts who are asking the question. What are they hoping to achieve with an answer to their question? Often the initial question that is being asked is not the right question to achieve their intended goal.</p>
+<p>After nailing down the goals of the project, the next task is to identify what data is already available or can be collected to answer it. If the question cannot be answered using the available data, then it needs to be refined to something that can be.</p>
+<p>Consider the example of a team of data scientists working at a hospital who have been tasked with helping to decrease the hospital’s rate of hospital-acquired infections (HAIs). The initial domain question posed to the data scientists was “Why have the rates of HAI increased in our hospital?” The first task is to identify the overall goal of the question. Are hospital management more interested in identifying which <em>patients</em> are at higher risk of an HAI so that they can try to prevent infections (e.g., by providing these patients with higher doses of antibiotics or speeding up discharge timelines), or are they more interested in identifying general hospital <em>practices</em>, such as surgical hygiene practices, that are leading to the overall increased rates of HAI so that they can implement a training program or intensify sanitation and sterilization protocols?</p>
+<p>The data required to address the patient-focused goal and the data required for the practice-focused goal of the HAI project are quite different. If the goal is to identify patient infection risk factors, relevant historical data can be obtained directly from the hospital’s medical records, which will contain rich, detailed information about patients who have experienced HAIs in the past. On the other hand, if the goal is to learn whether the hospital’s surgical hygiene practices are related to the increased infection rates, this data may not be readily available and will need to be manually collected, such as by watching recorded video footage, physically observing surgeries, or conducting a survey. Learning about what data is available may shift the goals of the project. Since historical patient record data is much easier to obtain than surgery practice data, this may explicitly shift the focus of the project to identifying patient HAI risk factors rather than uncovering poor hygiene practices. Expect your initial question to be continually refined as you learn more about the specific data that is available, and about what kinds of answers might be useful.</p>
+<p>Effective communication and collaboration with domain experts is a vital component of real-world research projects. However, for the data science projects discussed in this book, we face a challenge: the projects in this book each rely on publicly available data, and unfortunately, we do not have direct access to relevant domain collaborators. Ideally, we would have showcased real examples from our own collaborative research projects throughout this book. However, the majority of our collaborative projects are centered around solving real-world domain problems in the fields of medicine and healthcare. Given the sensitive nature of the data involved, sharing this data publicly would violate privacy concerns and ethical guidelines.</p>
+<p>While not having direct access to domain experts limits our ability to gain deeper insights into specific industries, we do our best to learn about the domain for each project by reading scientific literature so that the projects that we present within this book still provide valuable opportunities for showcasing the various data science techniques and approaches in the context of a plausible domain problem.</p>
+</section>
+<section id="data-collection" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">2.2.2</span> Data Collection</h3>
+<p>While some projects will use existing data (whether from public repositories, internal company databases, historical electronic medical records, or past experiments), other projects will involve collecting new data. Whenever possible, data scientists should be involved in designing the data collection protocol and collecting the data itself. It is often the case that when data is collected without involving the people who will analyze it, the resulting data ends up being poorly suited to answering the questions being posed. While we do not explicitly cover experimental design and data collection protocols in this book, some classic references include “Statistics for Experimenters: Design, Innovation, and Discovery” <span class="citation" data-cites="box_statistics_2005">(<a href="#ref-box_statistics_2005" role="doc-biblioref">Box, Hunter, and Hunter 2005</a>)</span> and “Design and Analysis of Experiments with R” <span class="citation" data-cites="lawson_design_2014">(<a href="#ref-lawson_design_2014" role="doc-biblioref">Lawson 2014</a>)</span>.</p>
+<p>When using existing data that has already been collected, ideally, you will be working with <strong>live data</strong> that is kept up to date (e.g., is corrected when errors are identified and maintained by a human), and for which additional background information can be obtained <span class="citation" data-cites="gelman_that_2009">(<a href="#ref-gelman_that_2009" role="doc-biblioref">Gelman 2009</a>)</span>. It is important to develop a detailed understanding of how the data was collected and what the values within it mean, so being in communication with the people who collected the data (or at least who know more about it than you) is very helpful. When relevant and feasible, it can be very helpful to physically visit the site of data collection to learn about the instruments and procedures used to collect the data that you are working with.</p>
+<p>In contrast, data that was collected in the past and is now stagnant (e.g., it lives online in a public data repository that is not maintained) and for which no additional relevant information can be obtained, is considered <strong>dead data</strong> <span class="citation" data-cites="gelman_that_2009">(<a href="#ref-gelman_that_2009" role="doc-biblioref">Gelman 2009</a>)</span>. When working with dead data, you have no way of verifying the assumptions that you make, making it difficult to ensure that the data is being correctly interpreted. As a result, the data-driven findings that you obtain from it may be less trustworthy.</p>
+<p>Each project that we introduce in this book involves publicly available data that has already been collected. Some of the projects will involve live data (such as the organ donations data from the World Health Organization and the US Department of Agriculture’s food nutrition data, both of which were collected by reputable government organizations and are continually updated), and others will involve dead data (such as the Ames house price data and the online shopping e-commerce data, both of which were collected as a snapshot of data from a data source that does not keep the data updated and about which we can obtain substantially less information). However, in all cases, we have done our best to learn about the data collection mechanisms and obtain relevant data documentation.</p>
+<p>Recall that real data almost never perfectly reflects reality, but knowing how a dataset was collected can give some sense of <em>how</em> the data is related to reality. At <em>minimum</em>, every dataset that you use should be accompanied by detailed data documentation (such as <code>README</code> files and codebooks) that describes how the data was collected and what measurements it contains. However, even good data documentation rarely paints the complete picture and is certainly no substitute for physical communication with a knowledgeable human.</p>
+</section>
+<section id="making-a-plan-for-evaluating-predictability" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="making-a-plan-for-evaluating-predictability"><span class="header-section-number">2.2.3</span> Making a Plan for Evaluating Predictability</h3>
+<p>Before moving to the second stage of the DSLC, we recommend making a plan for evaluating the predictability of your eventual results. If you can collect additional data (which resembles the future data to which you will be applying your results or algorithms), then you should either collect it now or make a plan for collecting it later. If not, you may need to split your existing data into a training set and validation set (and a test set, if relevant), using a splitting technique that best reflects the relationship between your current data and the future data to which you will be applying your results (see <a href="#sec-train-val-test" class="quarto-xref"><span class="quarto-unresolved-ref">sec-train-val-test</span></a> in <a href="#sec-veridical-ds" class="quarto-xref"><span class="quarto-unresolved-ref">sec-veridical-ds</span></a>).</p>
+</section>
+</section>
+<section id="dslc-stage-2-data-cleaning-and-exploratory-data-analysis" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="dslc-stage-2-data-cleaning-and-exploratory-data-analysis"><span class="header-section-number">2.3</span> DSLC Stage 2: Data Cleaning and Exploratory Data Analysis</h2>
+<section id="data-cleaning" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="data-cleaning"><span class="header-section-number">2.3.1</span> Data Cleaning</h3>
+<p>Once you’ve settled on a question and have collected some relevant data, it is time to <strong>clean</strong> your data. A clean dataset is one that is tidy, appropriately formatted, and has unambiguous entries. The initial <strong>data cleaning</strong> stage is spent identifying issues with the data (such as strange formatting and invalid values) and modifying it so that its values are valid and it is formatted in a computational- and human-friendly way. Data cleaning is an incredibly important stage of the DSLC because it not only helps ensure that your data is being correctly interpreted by your computer, but it also helps you to develop a more detailed understanding of the information that the data contains as well as its limitations.</p>
+<p>The goal of data cleaning is to create a version of your data that is maximally reflective of reality and will be correctly interpreted by your computer. Computers are machines of logic. While they can do complex mathematical computations in the blink of an eye, computers do not automatically know that humidity measurements should always fall between 0 and 100, nor do they know that the word “high” represents a larger magnitude than the word “low.” Your computer doesn’t realize that the first two columns in your data contain different versions of the same information, nor can it tell that the information reported in the “score” column should be interpreted as ordered numeric (rather than as unordered categorical) values.</p>
+<p>To ensure that your computer is faithfully using the information contained in your data, you will need to modify your data (by writing code, not by modifying the raw data file itself) so that it is in line with what your computer “expects.” However, the process of data cleaning is necessarily subjective and involves making assumptions about the underlying real-world quantities being measured as well as judgment calls about which modifications are the most sensible (such as deciding whether to replace negative humidity measurements with zeros, with missing values, or whether to just leave them alone).</p>
+</section>
+<section id="preprocessing" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="preprocessing"><span class="header-section-number">2.3.2</span> Preprocessing</h3>
+<p><strong>Preprocessing</strong> refers to the process of modifying your cleaned data to fit the requirements of a specific algorithm that you want to apply. For example, if you will be using an algorithm that requires your variables to be on the same scale, you may need to transform them or if you will be using an algorithm that does not allow missing values, you may need to impute or remove them. It is during preprocessing that you may also want to conduct <strong>featurization</strong>, the process of defining new features/variables using the existing information in your data if you believe that these will be helpful for your analysis.</p>
+<p>Just as with data cleaning, there is no <em>single</em> correct way to preprocess a dataset, and the procedure that you end up with typically involves a series of judgment calls, which should be documented in your code and documentation files.</p>
+<p>While we find it helpful to treat data cleaning and preprocessing as distinct processes, the two processes are fairly similar and it is sometimes simpler to treat data cleaning and preprocessing as a single unified process.</p>
+<div id="box-clean-prep" class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Box&nbsp;2.2: Data Cleaning and Preprocessing
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Data cleaning is the process of modifying a dataset so that it is tidy, appropriately formatted, and unambiguous. Preprocessing is the process of modifying a dataset so that it satisfies the formatting requirements of a particular analysis or algorithm.</p>
+<p>There is no single correct way to clean or preprocess a dataset because both processes involve making assumptions and judgment calls. A stability analysis can be conducted to investigate the impact of these judgment calls on any downstream results.</p>
+</div>
+</div>
+<p>Data cleaning and preprocessing are the focus of <a href="#sec-cleaning" class="quarto-xref"><span class="quarto-unresolved-ref">sec-cleaning</span></a>, where we will provide some guidelines for identifying messiness in data, as well as a highly customizable data cleaning procedure that can be tailored to fit the unique cleaning and preprocessing needs of every individual dataset.</p>
+</section>
+<section id="exploratory-data-analysis" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="exploratory-data-analysis"><span class="header-section-number">2.3.3</span> Exploratory Data Analysis</h3>
+<p>The next stage involves taking a deeper look at the data by creating informative tables, calculating informative <em>summary statistics</em> such as averages and medians, and producing informative visualizations. This stage typically has two sub-stages. The first sub-stage, <strong>exploratory data analysis (EDA)</strong>, involves developing rough numeric and visual summaries of the data that will help you understand the data and the patterns that it contains, while the second sub-stage, <strong>explanatory data analysis</strong>, involves polishing the most informative exploratory tables and graphs to communicate them to external audiences.</p>
+<p>An example of an <em>exploratory</em> data visualization based on the government spending data presented in <a href="#tbl-govt-spending" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-govt-spending</span></a> is the line plot shown in <a href="#fig-govt-spending-exploratory-explanatory" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-govt-spending-exploratory-explanatory</span></a>(a), which was created very quickly in R to help us explore the annual US government’s R&amp;D spending on climate and energy over time. <a href="#fig-govt-spending-exploratory-explanatory" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-govt-spending-exploratory-explanatory</span></a>(b) shows a polished <em>explanatory</em> version of this visualization that we might show to an external audience (such as the public, or some government or business officials). Version (b) has been customized to tell a clearer story: energy spending tends to increase during Democratic presidencies, but climate spending is fairly stagnant, regardless of the political affiliation of the president. As an exercise at the end of this chapter, you will be asked to re-create these figures yourself.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-govt-spending-exploratory-explanatory" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-govt-spending-exploratory-explanatory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02-dslc_files/figure-html/fig-govt-spending-exploratory-explanatory-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-govt-spending-exploratory-explanatory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: (a) An exploratory line plot and (b) an explanatory line plot showing the US government’s R&amp;D spending on climate and energy in billions USD. The background in (b) is colored by the political party that is in office.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#sec-eda" class="quarto-xref"><span class="quarto-unresolved-ref">sec-eda</span></a> introduces a range of principles for creating compelling numeric and visual descriptions of your data.</p>
+</section>
+<section id="data-snooping-and-pcs" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="data-snooping-and-pcs"><span class="header-section-number">2.3.4</span> Data Snooping and PCS</h3>
+<p>While exploring your data is an extremely important part of the DSLC, it is not without risk. <strong>Data snooping</strong> is a phenomenon in which you present the relationships and patterns that you found while exploring your data as proven conclusions when in reality, all you have done is show that these patterns exist for one specific set of data points and sequence of judgment calls <span class="citation" data-cites="freedman_statistics_2007 freedman_statistical_2009 smith_data_2002">(<a href="#ref-freedman_statistics_2007" role="doc-biblioref">D. Freedman, Pisani, and Purves 2007</a>; <a href="#ref-freedman_statistical_2009" role="doc-biblioref">D. A. Freedman 2009</a>; <a href="#ref-smith_data_2002" role="doc-biblioref">Smith and Ebrahim 2002</a>)</span>. If you look at a dataset from enough angles, it becomes increasingly likely that you will find a <em>coincidental</em> (rather than a “real”) pattern <span class="citation" data-cites="simmons_false-positive_2011">(<a href="#ref-simmons_false-positive_2011" role="doc-biblioref">Simmons, Nelson, and Simonsohn 2011</a>)</span>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>To avoid data snooping, some research fields (e.g., clinical trials) require that analyses be <em>preregistered</em> before they are undertaken. The idea is that if you state which relationships you are going to look for before you start looking at your data, then you are limiting the chance of finding a coincidental pattern. While such caution is important for high-stakes studies such as clinical trials, it has the unfortunate side effect of preventing the discovery of new patterns and relationships that have not previously been hypothesized.</p>
+<p>In veridical data science, we thus take a different route: you are free to search for patterns or relationships in your data, but you must demonstrate that any results that you find reemerge in relevant future data (i.e., are predictable) and are stable to the data and cleaning, preprocessing, and analytic judgment calls that you made. By demonstrating the predictability and stability of your results, you are providing evidence that your findings were not a fluke.</p>
+</section>
+</section>
+<section id="dslc-stage-3-uncovering-intrinsic-data-structures" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="dslc-stage-3-uncovering-intrinsic-data-structures"><span class="header-section-number">2.4</span> DSLC Stage 3: Uncovering Intrinsic Data Structures</h2>
+<p>While EDA is incredibly useful for providing a high-level overview of the data, sometimes you will want to dig a little bit deeper by teasing out some more complex relationships and patterns. For example, can the data be projected onto a lower-dimensional subspace that summarizes the most informative parts of the original data? <strong>Dimensionality reduction analysis</strong> will help you find out. It is often computationally easier to work with a lower-dimensional version of your data, and you can learn a lot about the fundamental structure of your data—in terms of the relationships between the variables—by observing what it looks like when it is condensed to just its most informative parts.</p>
+<p>Another type of structure that you may want to investigate involves looking at the relationships between the observational units (data points) and identifying whether there are any natural underlying groupings by conducting a <strong>cluster analysis</strong>.</p>
+<p>Dimensionality reduction and cluster analyses are an optional part of the DSLC, but even if they are not the goal of your project, you may find them to be useful exploratory exercises that will help you to better understand the structure of your data.</p>
+</section>
+<section id="dslc-stage-4-predictive-andor-inferential-analysis" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="dslc-stage-4-predictive-andor-inferential-analysis"><span class="header-section-number">2.5</span> DSLC Stage 4: Predictive and/or Inferential Analysis</h2>
+<section id="prediction" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="prediction"><span class="header-section-number">2.5.1</span> Prediction</h3>
+<p>Many data science questions are formulated as <strong>prediction problems</strong>, where the goal is to use past or current observable data to predict something about future unseen data, usually to help make real-world decisions. In our government research and development spending example, we might want to predict the amount of R&amp;D spending on energy for the next eight years based on the general trends that we observed in the currently available data. <a href="#fig-pred-energy-spending" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-pred-energy-spending</span></a> shows the energy R&amp;D spending over time as a solid line and overlays a dashed predicted energy spending <em>trend</em> projected out to 2025.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-pred-energy-spending" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pred-energy-spending-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02-dslc_files/figure-html/fig-pred-energy-spending-1.png" class="img-fluid figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pred-energy-spending-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: Government R&amp;D spending on energy from 2000 to 2017 with a predicted spending trend overlaid as a dotted line.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>While traditional statistics certainly considers prediction problems, they are not always the focus. Common statistical techniques related to generating predictions, such as linear regression, were more likely to have the goal of <em>inference</em> rather than of prediction (i.e., the goal was to learn about the broader population by identifying patterns and relationships in the data rather than to predict the future). In contrast, the goal of the modern field of <strong>machine learning (ML)</strong> has long been to develop techniques for generating accurate predictions.</p>
+<p>Computationally generating data-driven predictions involves <em>training</em> an algorithm to identify relationships between the response (a variable of interest in your data that you are trying to predict) and the predictors (the other variables in the data). Today, algorithms that use the data to <em>predict a response</em> are called <strong>supervised learning algorithms</strong>, which fall under the umbrella of ML algorithms. Note that in the field of traditional statistics, supervised learning algorithms were originally called <strong>classification</strong> and <strong>regression algorithms</strong> (for discrete and continuous responses, respectively). The supervised learning algorithms that you will learn about in this book include the least squares (LS) algorithm, the logistic regression algorithm, and the random forest (RF) algorithm (we won’t be covering neural networks or deep learning algorithms in this book). Note that the clustering and dimensionality analysis techniques discussed in the previous section fall under another branch of ML algorithms called <strong>unsupervised learning algorithms</strong> (they are not “supervised” by a response).</p>
+<p>In ML culture, it is already common practice to demonstrate that any predictive algorithm that you train generates accurate predictions on withheld validation/test data. In veridical data science, we place a greater focus on ensuring that the training, validation, and test sets resemble the relationship between the current and future data, and also ensuring that the predictions that are produced by our algorithms are <em>stable</em>. Prediction problems are the focus of part III of this book.</p>
+</section>
+<section id="data-driven-inference" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="data-driven-inference"><span class="header-section-number">2.5.2</span> Data-Driven Inference</h3>
+<p>Another type of data-driven problem that you may encounter is problems of <em>inference</em>, which involve learning about a broader population by quantifying the uncertainty associated with <em>a parameter estimate</em> (such as the “sample mean,” which is an estimate for a greater “population mean”). Traditional statistical inference techniques include hypothesis testing and confidence intervals.</p>
+<p>In contrast to the perspectives that we take in veridical data science and the PCS framework (which focus on evaluating <em>actual</em> sources of uncertainty stemming from the real-world data collection process and the human judgment calls that are made throughout the DSLC), traditional statistical inference only evaluates the <em>hypothetical</em> sources uncertainty that arise when we assume that the data corresponds to a <em>random sample</em> from a well-defined <em>population</em>, which, unfortunately, does not reflect most real-world datasets.</p>
+<p><em>While we do not discuss inference (veridical or traditional) in this version of this book</em>, some of the underlying ideas are introduced in <a href="#sec-combine-ml" class="quarto-xref"><span class="quarto-unresolved-ref">sec-combine-ml</span></a> in the context of prediction problems. The Yu research group is actively developing a veridical data science, PCS-based approach to uncertainty quantification for general estimation problems, so we recommend keeping an eye on the Yu group’s ongoing research outputs to learn how to conduct uncertainty quantification within the veridical data science framework.</p>
+</section>
+</section>
+<section id="sec-dslc-validation" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="sec-dslc-validation"><span class="header-section-number">2.6</span> DSLC Stage 5: Evaluation of Results</h2>
+<p>Evaluating your findings is a major focus of this book, and we have included it here as a separate step. However, in practice, it should be performed throughout the DSLC. As discussed in <a href="#sec-veridical-ds" class="quarto-xref"><span class="quarto-unresolved-ref">sec-veridical-ds</span></a>, we recommend qualitatively evaluating your results using critical thinking and quantitatively evaluating your results using the PCS framework (by assessing the predictability and stability of your results).</p>
+<p>You may also want to present your results to domain experts to ensure that they make sense in the context of domain knowledge. However, to reduce potential confirmation bias, we recommend using a <em>negative control</em>, such as showing “fake” versions of your results to domain experts alongside your actual results and confirming that the domain experts identify that your actual results are the ones that make the most sense.</p>
+</section>
+<section id="dslc-stage-6-communication-of-results-and-updating-domain-knowledge" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="dslc-stage-6-communication-of-results-and-updating-domain-knowledge"><span class="header-section-number">2.7</span> DSLC Stage 6: Communication of Results and Updating Domain Knowledge</h2>
+<p>The final stage of the DSLC involves communicating your results to your intended audience so they can be used for real-world decision making. This might involve creating a mobile application, writing a research paper, creating an infographic to inform the public, or putting together some slides to present to the executives in your company. The ability to effectively communicate the results of your analysis to the people who might use them is crucial to the success of your project. After all, if you’ve done some truly inspirational analysis, but you can’t explain your results to anyone, then what was the point of conducting the analysis in the first place?</p>
+<p>In <a href="#sec-eda" class="quarto-xref"><span class="quarto-unresolved-ref">sec-eda</span></a>, we will discuss communicating data and results in the context of creating impactful data visualizations. However, communicating data-based results often requires more than just creating good figures. It also requires that you create effective presentations and write clearly and informatively for both technical <em>and</em> nontechnical audiences.</p>
+<p>Your data-driven products should be tailored to your audience. Rather than assuming that your audience is already familiar with your project, take the time to explain your analysis and figures very carefully and clearly. While the takeaway message of a figure or slide may be obvious to you, it is good practice to explicitly tell your audience how to interpret it (without using fancy jargon). A resource for learning how to prepare impactful figures is “Storytelling with Data” <span class="citation" data-cites="knaflic_storytelling_2015">(<a href="#ref-knaflic_storytelling_2015" role="doc-biblioref">Knaflic 2015</a>)</span>, and a resource for improving your technical writing skills is “Writing Science in Plain English” <span class="citation" data-cites="greene_writing_2013">(<a href="#ref-greene_writing_2013" role="doc-biblioref">Greene 2013</a>)</span>.</p>
+<p>While communicating your results is incredibly important, for many data science projects, the true goal is to put the results “into production.” For many academic projects, the project will end with a journal publication. But if you have developed a predictive algorithm for detecting melanoma, your algorithm isn’t going to have much real-world impact simply by being described in a paper. The clinicians who might want to use the algorithm are usually not technically trained—they won’t be able to download your code, fire up R, and input their patient’s data into your algorithm to determine whether the algorithm thinks that their patient’s mole is melanoma. And even if they could do so, such a process would be very time consuming. Instead, your algorithm should be built into the software that they are already using, or would at the very least be accessible via a point-and-click website or graphical user interface into which they could upload their image.</p>
+<p>Unfortunately, most data scientists don’t possess the skills required to develop a sophisticated app or incorporate ML models into existing software. The best that most data scientists can do is to put their code on GitHub (see <a href="#sec-workflow-setup" class="quarto-xref"><span class="quarto-unresolved-ref">sec-workflow-setup</span></a>), and maybe even create an interactive shiny app<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> (both of which are a great start but are often not sufficient for heavy real-world use). However, putting data science results into production is often not a data scientist’s job (but is the job of software engineers)!</p>
+</section>
+<section id="exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="true-or-false-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="true-or-false-exercises">True or False Exercises</h3>
+<p>For each question, specify whether the answer is true or false (briefly justify your answers).</p>
+<ol type="1">
+<li><p>There are many ways to formulate a data science problem.</p></li>
+<li><p>PCS evaluations are necessary only when you will be presenting your results to an external audience.</p></li>
+<li><p>Once you have moved on to a new stage of the DSLC, it is OK to return to and update previous stages.</p></li>
+<li><p>There is only one correct way to conduct every data analysis.</p></li>
+<li><p>Every data science project must progress through every stage of the DSLC.</p></li>
+<li><p>The judgment calls that you make during data cleaning can have an impact on your downstream results.</p></li>
+<li><p>PCS evaluations can help prevent data snooping.</p></li>
+<li><p>PCS uncertainty quantification is unrelated to traditional statistical inference.</p></li>
+<li><p>Communication with domain experts is only important during the problem formulation stage.</p></li>
+</ol>
+</section>
+<section id="conceptual-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="conceptual-exercises">Conceptual Exercises</h3>
+<ol start="10" type="1">
+<li><p>Describe the phenomenon of “data snooping” and how to avoid it.</p></li>
+<li><p>List two differences between <a href="#fig-govt-spending-exploratory-explanatory" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-govt-spending-exploratory-explanatory</span></a>(a) and <a href="#fig-govt-spending-exploratory-explanatory" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-govt-spending-exploratory-explanatory</span></a>(b). Discuss whether you think these changes make the takeaway message of <a href="#fig-govt-spending-exploratory-explanatory" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-govt-spending-exploratory-explanatory</span></a>(b) clearer. Are there any other changes that you would make that might help make the takeaway message clearer?</p></li>
+<li><p>What does it mean for a result or analysis to be “put into production”?</p></li>
+<li><p>Write a short summary of each stage of the DSLC.</p></li>
+</ol>
+</section>
+<section id="reading-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="reading-exercises">Reading Exercises</h3>
+<ol start="14" type="1">
+<li>Read “Science and Statistics” Box (1976), available in the <code>exercises/reading</code> folder on the <a href="https://github.com/Yu-Group/vds-book-supplementary">supplementary GitHub repository</a>. Comment on how it relates to the DSLC and the PCS framework.</li>
+</ol>
+</section>
+<section id="coding-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="coding-exercises">Coding Exercises</h3>
+<ol start="15" type="1">
+<li><p>This exercise asks you to re-create the government R&amp;D spending figures from <a href="#fig-govt-spending-exploratory-explanatory" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-govt-spending-exploratory-explanatory</span></a> in R or Python. The data and some initial code for loading and cleaning the data can be found in the <code>exercises/government_spending/</code> folder in the <a href="https://github.com/Yu-Group/vds-book-supplementary">supplementary GitHub repository</a>.</p>
+<ol type="a">
+<li><p>Run the existing code chunks in the <code>visualize.qmd</code> (for R) or equivalent <code>visualize.ipynb</code> file (for Python) to load and combine the government spending data files.</p></li>
+<li><p>In R or Python, re-create <a href="#fig-govt-spending-exploratory-explanatory" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-govt-spending-exploratory-explanatory</span></a>(a) by writing some of your own code at the end of the <code>visualize.qmd</code> or the equivalent <code>visualize.ipynb</code> file.</p></li>
+<li><p>For a challenge, try to re-create <a href="#fig-govt-spending-exploratory-explanatory" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-govt-spending-exploratory-explanatory</span></a>(b) too.</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="case-study-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="case-study-exercises">Case Study Exercises</h3>
+<ol start="16" type="1">
+<li><p>Imagine that you live in an area regularly affected by wildfires. You decide that you want to develop an algorithm that will predict the next day’s Air Quality Index (AQI) in your town. In this project, you will mentally walk through each stage of the DSLC for this project (you don’t need to implement them unless you’re feeling ambitious). Your answers to the following questions don’t need to be too specific; just provide some general ideas of what you might do at each stage.</p>
+<ol type="a">
+<li><p>Problem formulation and data collection: Formulate a project question and discuss what real data sources you will need to collect to answer it. Your data should be publicly available, and we recommend explicitly searching the web for some relevant datasets. You may want to collect multiple sources of data. What data would you use for conducting some predictability evaluations?</p></li>
+<li><p>Data cleaning and EDA: How might you need to clean or preprocess your data for analysis? Can you anticipate any issues that the data you found might have? What explorations might you conduct to learn about the data?</p></li>
+<li><p>Predictive analysis: What real-world quantity are you trying to predict?</p></li>
+<li><p>Evaluation of results: How would you evaluate the trustworthiness of your algorithm?</p></li>
+<li><p>Communication of results: Who is your intended audience? What kind of final product would you create so that your algorithm can be used by your intended audience?</p></li>
+</ol></li>
+</ol>
+</section>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-benjamini_selective_2020" class="csl-entry" role="listitem">
+Benjamini, Yoav. 2020. <span>“Selective Inference: <span>The</span> Silent Killer of Replicability.”</span> <em>Harvard Data Science Review</em> 2 (4).
+</div>
+<div id="ref-box_statistics_2005" class="csl-entry" role="listitem">
+Box, George E. P., J. Stuart Hunter, and William G. Hunter. 2005. <em>Statistics for <span>Experimenters</span>: <span>Design</span>, <span>Innovation</span>, and <span>Discovery</span></em>. Wiley.
+</div>
+<div id="ref-freedman_statistical_2009" class="csl-entry" role="listitem">
+Freedman, David A. 2009. <em>Statistical <span>Models</span>: <span>Theory</span> and <span>Practice</span></em>. Cambridge University Press.
+</div>
+<div id="ref-freedman_statistics_2007" class="csl-entry" role="listitem">
+Freedman, David, Robert Pisani, and Roger Purves. 2007. <em>Statistics</em>. 4th ed. W. W. Norton &amp; Company.
+</div>
+<div id="ref-gelman_that_2009" class="csl-entry" role="listitem">
+Gelman, Andrew. 2009. <span>“That Modeling Feeling.”</span> <em>Blog: Statistical Modeling, Causal Inference, and Social Science</em>, July.
+</div>
+<div id="ref-greene_writing_2013" class="csl-entry" role="listitem">
+Greene, Anne E. 2013. <em>Writing <span>Science</span> in <span>Plain</span> <span>English</span></em>. University of Chicago Press.
+</div>
+<div id="ref-knaflic_storytelling_2015" class="csl-entry" role="listitem">
+Knaflic, Cole Nussbaumer. 2015. <em>Storytelling with <span>Data</span>: <span>A</span> <span>Data</span> <span>Visualization</span> <span>Guide</span> for <span>Business</span> <span>Professionals</span></em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-lawson_design_2014" class="csl-entry" role="listitem">
+Lawson, John. 2014. <em>Design and <span>Analysis</span> of <span>Experiments</span> with <span>R</span></em>. 1st ed. Chapman; Hall/CRC.
+</div>
+<div id="ref-mock_tidy_2022" class="csl-entry" role="listitem">
+Mock, Thomas. 2022. <span>“Tidy <span>Tuesday</span>: <span>A</span> Weekly Data Project Aimed at the <span>R</span> Ecosystem.”</span>
+</div>
+<div id="ref-simmons_false-positive_2011" class="csl-entry" role="listitem">
+Simmons, Joseph P., Leif D. Nelson, and Uri Simonsohn. 2011. <span>“False-Positive Psychology: <span>Undisclosed</span> Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.”</span> <em>Psychological Science</em> 22 (11): 1359–66.
+</div>
+<div id="ref-smith_data_2002" class="csl-entry" role="listitem">
+Smith, George Davey, and Shah Ebrahim. 2002. <span>“Data Dredging, Bias, or Confounding.”</span> <em>BMJ: British Medical Journal</em> 325 (7378): 1437–38.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>This data originally comes from the American Association for the Advancement of Science Historical Trends, and the version that we are using was collated by Thomas Mock for the Tidy Tuesday project <span class="citation" data-cites="mock_tidy_2022">(<a href="#ref-mock_tidy_2022" role="doc-biblioref">Mock 2022</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Data snooping is related to a concept known as <em>p-hacking,</em> in which positive results arise by chance when you conduct many statistical hypothesis tests, as well as <em>selective inference</em>, the phenomena where researchers only present “good” results <span class="citation" data-cites="benjamini_selective_2020">(<a href="#ref-benjamini_selective_2020" role="doc-biblioref">Benjamini 2020</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Shiny is a package that makes it easy to build interactive web apps straight from R &amp; Python.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a aria-label='An Introduction to Veridical Data Science' class='pagination-link' href='/01-veridical_ds'>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An Introduction to Veridical Data Science</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a aria-label='Setting Up Your Data Science Project' class='pagination-link' href='/03-code_reproducibility'>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Setting Up Your Data Science Project</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class='nav-link' href='/license'>
+<p>License</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Yu-Group/vds-book-supplementary" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

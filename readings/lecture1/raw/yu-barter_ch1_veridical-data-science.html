@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; An Introduction to Veridical Data Science – Veridical Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02-dslc.html" rel="next">
+<link href="./00-acknowledgements.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-TJTW27Q5D3"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-TJTW27Q5D3', { 'anonymize_ip': true});
+</script>
+</head><body class="nav-sidebar docked nav-fixed"><button type="button" class="btn btn-primary btn-lg bi bi-arrow-up" id="btn-back-to-top"></button>
+
+<style>
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+}
+</style>
+
+<script id="backtotop" type="application/javascript">
+let backToTopButton = document.getElementById("btn-back-to-top");
+
+window.addEventListener('scroll', () => {
+            if (document.body.scrollTop > 20 || 
+document.documentElement.scrollTop > 20) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    });
+
+backToTopButton.addEventListener("click", function () {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+});
+</script>
+<div id="progress-bar" style="width: 0%; height:2px; background-color: 
+rgb(89 127 235);; position: fixed; top: 0px; z-index: 2000;"></div>
+
+<script id="progressbar" type="text/javascript">
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const bar = document.querySelector('#progress-bar');
+    const post = document.querySelector('#quarto-content');
+    const html = document.documentElement;
+    
+    const height = post.scrollHeight + post.offsetTop;
+    
+    window.addEventListener('scroll', () => {
+        bar.style.width = (html.scrollTop / (height- html.clientHeight)) * 
+100 + '%';
+    });
+});
+</script>
+<style>
+  #quarto-sidebar .menu-text {
+    line-height:1.5em;
+
+  }
+</style>
+
+
+<style>
+  #margin-sidebar {
+    line-height:1.5em;
+  }
+</style>
+
+
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class='navbar-brand' href='/'>
+    <span class="navbar-title">Veridical Data Science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://binyu.stat.berkeley.edu/"> 
+<span class="menu-text">Bin Yu</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.rebeccabarter.com"> 
+<span class="menu-text">Rebecca L. Barter</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/Yu-Group/vds-book-supplementary" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href='/01-veridical_ds'><strong>Part I</strong>: <em>An Introduction to Veridical Data Science</em></a></li><li class="breadcrumb-item"><a href='/01-veridical_ds'><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An Introduction to Veridical Data Science</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/'>
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/00-acknowledgements'>
+ <span class="menu-text">Acknowledgments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Part I</strong>: <em>An Introduction to Veridical Data Science</em></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link active' href='/01-veridical_ds'>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An Introduction to Veridical Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/02-dslc'>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Data Science Life Cycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/03-code_reproducibility'>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Setting Up Your Data Science Project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Part II</strong>: <em>Preparing, Exploring, and Describing Data</em></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/04-data_cleaning'>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Preparation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/05-data_viz'>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/06-pca'>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Principal Component Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/07-cluster'>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Part III</strong>: <em>Prediction</em></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/08-prediction_intro'>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">An Introduction to Prediction Problems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/09-ls'>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Continuous Responses and Least Squares</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/10-ls_continued'>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Extending the Least Squares Algorithm</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/11-ls_binary'>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Binary Responses and Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/12-rf'>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees and the Random Forest Algorithm</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/13-final_ml'>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Producing the Final Prediction Results</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/14-conclusion'>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a class='sidebar-item-text sidebar-link' href='/15-exercise_answers'>
+ <span class="menu-text">Answers to True or False Exercises</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-role-of-data-and-algorithms-in-real-world-decision-making" id="toc-the-role-of-data-and-algorithms-in-real-world-decision-making" class="nav-link active" data-scroll-target="#the-role-of-data-and-algorithms-in-real-world-decision-making"><span class="header-section-number">1.1</span> The Role of Data and Algorithms in Real-World Decision Making</a></li>
+  <li><a href="#sec-critical-thinking" id="toc-sec-critical-thinking" class="nav-link" data-scroll-target="#sec-critical-thinking"><span class="header-section-number">1.2</span> Evaluating and Building Trustworthiness Using Critical Thinking</a>
+  <ul class="collapse">
+  <li><a href="#case-study-estimating-animal-deaths-caused-by-the-2019-australian-bushfires" id="toc-case-study-estimating-animal-deaths-caused-by-the-2019-australian-bushfires" class="nav-link" data-scroll-target="#case-study-estimating-animal-deaths-caused-by-the-2019-australian-bushfires"><span class="header-section-number">1.2.1</span> Case Study: Estimating Animal Deaths Caused by the 2019 Australian Bushfires</a></li>
+  </ul></li>
+  <li><a href="#sec-pcs" id="toc-sec-pcs" class="nav-link" data-scroll-target="#sec-pcs"><span class="header-section-number">1.3</span> Evaluating and Building Trustworthiness Using the PCS Framework</a>
+  <ul class="collapse">
+  <li><a href="#sec-predictability-intro" id="toc-sec-predictability-intro" class="nav-link" data-scroll-target="#sec-predictability-intro"><span class="header-section-number">1.3.1</span> Predictability</a></li>
+  <li><a href="#sec-stability-perturbation" id="toc-sec-stability-perturbation" class="nav-link" data-scroll-target="#sec-stability-perturbation"><span class="header-section-number">1.3.2</span> Stability</a></li>
+  <li><a href="#sec-computability" id="toc-sec-computability" class="nav-link" data-scroll-target="#sec-computability"><span class="header-section-number">1.3.3</span> Computability</a></li>
+  <li><a href="#pcs-as-a-unification-of-cultures" id="toc-pcs-as-a-unification-of-cultures" class="nav-link" data-scroll-target="#pcs-as-a-unification-of-cultures"><span class="header-section-number">1.3.4</span> PCS as a Unification of Cultures</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#true-or-false-exercises" id="toc-true-or-false-exercises" class="nav-link" data-scroll-target="#true-or-false-exercises">True or False Exercises</a></li>
+  <li><a href="#conceptual-exercises" id="toc-conceptual-exercises" class="nav-link" data-scroll-target="#conceptual-exercises">Conceptual Exercises</a></li>
+  <li><a href="#reading-exercises" id="toc-reading-exercises" class="nav-link" data-scroll-target="#reading-exercises">Reading Exercises</a></li>
+  <li><a href="#case-study-exercises" id="toc-case-study-exercises" class="nav-link" data-scroll-target="#case-study-exercises">Case Study Exercises</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Yu-Group/vds-book-supplementary" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href='/01-veridical_ds'><strong>Part I</strong>: <em>An Introduction to Veridical Data Science</em></a></li><li class="breadcrumb-item"><a href='/01-veridical_ds'><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An Introduction to Veridical Data Science</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-veridical-ds" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An Introduction to Veridical Data Science</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This is the Open Access web version of Veridical Data Science. A <a href="https://mitpress.mit.edu/9780262049191/veridical-data-science/">print version</a> of this book is published by MIT Press. This work and associated materials are subject to a Creative Commons CC-BY-NC-ND license.</p>
+</div>
+</div>
+</div>
+<p>To practice veridical data science is to practice “truthful” data science. The goal of veridical data science is to answer real-world questions by collecting and critically evaluating relevant empirical (data-driven) evidence using human judgment calls in the context of domain knowledge. If the empirical evidence is deemed sufficiently trustworthy, it is communicated to domain stakeholders, where it can play a role in real-world decision making and updating domain knowledge.</p>
+<div id="box-vds" class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Box&nbsp;1.1: Veridical Data Science
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Veridical data science is the practice of conducting data analysis while making human judgment calls and using domain knowledge to extract and communicate useful and trustworthy information from data to solve a real-world domain problem.</p>
+</div>
+</div>
+<p>The overall goal of most data science projects is to use the insights gained from data analyses to help us make decisions in the real world. For instance, demographers conduct and analyze surveys on members of a human population of interest to help guide policy decisions, ecologists observe and analyze data on animal and plant distributions and behaviors to help make conservation decisions, and financial analysts evaluate financial market trends to help make financial decisions.</p>
+<section id="the-role-of-data-and-algorithms-in-real-world-decision-making" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="the-role-of-data-and-algorithms-in-real-world-decision-making"><span class="header-section-number">1.1</span> The Role of Data and Algorithms in Real-World Decision Making</h2>
+<p>Obtaining data-driven insights typically involves implementing <em>algorithms</em> that are designed to summarize and extract the relevant patterns and relationships that are hidden within a dataset. An <strong>algorithm</strong> is a set of instructions that tell your computer how to perform a specific task (such as summarizing a particular pattern). Since humans chose the set of instructions that define each algorithm, each algorithm is a <em>mental construct</em> that is intended to represent certain types of relationships that we hypothesize to be meaningful in our data. We use the term “algorithm” fairly broadly. For example, in addition to “machine learning (ML) algorithms”, which generate predictions of a response, you could think of computationally calculating the <em>mean</em> as an algorithm that adds up a collection of numbers and then divides by the number of numbers in the collection. You could even think of the process of creating a scatterplot as a data visualization algorithm that takes a collection of pairs of numbers and arranges them as points in two dimensions.</p>
+<p>The relevance of an algorithm to the real world is upper-bounded by the extent to which the data that underlies it reflects reality. Unfortunately, data almost never perfectly captures the real world that it was designed to measure. A poorly thought-out or poorly followed data collection protocol may result in a dataset that does not adequately represent the intended real-world population, and imprecise instruments and human approximations can lead to incorrect values being entered into a dataset. Unless we know with certainty what the “true” values of each of the real-world quantities being measured are (which we generally don’t, since we only see our own measurements of these quantities), we typically don’t know how accurate the values in any given dataset are. Moreover, even if our original data is a reasonable reflection of reality, when we clean and preprocess our data so that we can conduct computations with it, we modify it. While these modifications are typically intended to bring our data more in line with reality, they are based on our own judgment calls and assumptions about the real-world quantities that the measurements in our data are supposed to represent. However, mistaken assumptions may unintentionally diminish the relationship between our data and reality.</p>
+<p>However, these issues are not only relevant for the <strong>current data</strong> that we use to conduct our analyses and fit our algorithms, they are also true for the <strong>future data</strong> to which we will apply them. For instance, although a demographer might have analyzed a survey that involved 500 Americans, the end goal is to use this information to help understand and make future decisions for <em>all</em> Americans (in this case, the current data corresponds to the 500 Americans involved in the survey on the date when the survey was taken, and the future data corresponds to all Americans in a time period following the survey). Similarly, a financial analyst might train an algorithm for predicting financial market trends based on data from the past 10 years, but their goal is to apply their algorithm to predict and understand future market trends. In each case, the future data being used to make real-world decisions is similar to—but certainly not the same as—the current data used to conduct the analysis and fit the algorithms.</p>
+<p>If we want the real-world decisions that we make based on our algorithms to be trustworthy, we thus need the current data that underlies our algorithms and the future data to which we want to apply them to reasonably reflect reality and to be similar to one another.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> We also need the algorithms that we fit to be able to reliably capture the patterns and relationships that are contained within both the current and future data. That is, we need strong connections between the <strong>three realms</strong> (<a href="#fig-three-realms2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-three-realms2</span></a>), which are (1) the real-world realm (where we live); (2) the data realm (which is an approximation to reality and is where our data lives); and (3) the algorithmic realm (where the algorithms that are mental constructs designed to represent our data live).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-three-realms2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-three-realms2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Figures-External/intro/three_realms.png" style="width:5.5in;height:3in" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-three-realms2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: The three realms: reality, an approximation of reality (where our data lives), and the mental construct realm (where our analyses and algorithms live).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The problem is that we usually don’t know how strong the connections among these three realms are, and making real-world decisions based on results from algorithms that don’t represent reality (whether due to the data being a poor approximation of reality or the improper use of analytic techniques) can lead to untrustworthy results that can have drastic real-world consequences. Consider the example of facial recognition software. It has been well-documented that many software applications designed to recognize faces using images are much better at recognizing the faces of light-skinned people than dark-skinned people. One of the primary drivers of this issue is that these algorithms were built primarily using images from people with light skin (i.e., the data did not reflect the diversity that exists in the real world) <span class="citation" data-cites="khalil_investigating_2020">(<a href="#ref-khalil_investigating_2020" role="doc-biblioref">Khalil et al. 2020</a>)</span>. When biased data is used to train facial recognition software, the resulting software will typically also be biased, and when used in the real world, these biases can lead to the exacerbation of existing societal inequalities.</p>
+<p>Since your data will not inform you whether it is accurately representing reality, nor will your algorithms warn you when they are being used inappropriately, you need to conduct some <em>data-detective</em> (critical thinking) work to determine whether your data is a reasonable reflection of reality and whether your algorithms are being applied appropriately to your data and domain problem. In <a href="#sec-critical-thinking" class="quarto-xref"><span class="quarto-unresolved-ref">sec-critical-thinking</span></a>, we will introduce some critical thinking questions that you can ask that will help you use relevant domain knowledge to assess the trustworthiness of data-driven results <em>qualitatively</em> in terms of how accurately the data reflects reality and how appropriate the analyses and algorithms are in the context of the data and domain problem. Then, in <a href="#sec-pcs" class="quarto-xref"><span class="quarto-unresolved-ref">sec-pcs</span></a>, we will introduce the principles of predictability, computability, and stability (PCS), which we will use throughout this book to assess the trustworthiness of data-driven results <em>quantitatively</em> in terms of how applicable the results are to relevant future data scenarios and how sensitive they are to reasonable perturbations in our data and analysis pipeline (including the human judgment calls that we make when cleaning, preprocessing, and analyzing data).</p>
+</section>
+<section id="sec-critical-thinking" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="sec-critical-thinking"><span class="header-section-number">1.2</span> Evaluating and Building Trustworthiness Using Critical Thinking</h2>
+<p>Data science involves more than just doing math and writing code; it also requires strong critical thinking skills and a foundation of domain knowledge relevant to the project that you’re working on (which can be obtained from your own expertise, the internet, books, or your collaborators). These skills are crucial for identifying potential weaknesses in the connections between the three realms, described above, and for detecting biases that might sneak into the data collection and analysis pipeline. Without strong critical thinking skills and basic domain knowledge (even if just from a literature review), you run the risk of producing misleading results that can have dire real-world consequences.</p>
+<p>Unfortunately, statistics and data analyses have a poor reputation for trustworthiness among the general public, with sayings such as “There are three kinds of lies: lies, damned lies, and statistics<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>” commonly interrupting casual discussions about data analysis. As much as we would love to say that this reputation is undeserved, we can’t deny that it <em>is</em> very easy to use data to lie. The problem is that most of the time, these lies are unintentional, resulting from a lack of critical thinking and a failure to thoroughly scrutinize data-driven results (e.g., using the principles of PCS that we will introduce below) before presenting them as “facts.”</p>
+<p>A data scientist who is well versed in critical thinking and domain knowledge (and/or is working closely with domain experts), who possesses a reasonable understanding of the algorithms being used (including the relevant assumptions and pitfalls), and who embraces the principles of PCS, is substantially less likely to fall into the trap of unintentionally lying with data. Next time you hear someone say, “There are three kinds of lies: lies, damned lies, and statistics,” rather than getting offended, you can instead correct them: “There are three kinds of lies: lies, damned lies, and <em>bad</em> statistics.” Not all data science projects involve bad data analysis, but some certainly do!</p>
+<p>Some critical thinking techniques that we recommend employing throughout every data science project (and to assess other people’s projects) include the following:</p>
+<ul>
+<li><p>Asking questions about the <em>domain problem</em>. Is the question being framed really the question you care about, and is this question ethical in the first place? For example, if you have been presented with the business question “Which features of our website can we change that will make our customers less likely to cancel their subscription?” you might find that one answer is to move the “Cancel subscription” button to a more discrete (i.e., harder-to-find) location. But is this really the question that you want to ask? Is it ethical? A better question might have been, “Why do customers tend to cancel our product subscription?” The answer to that question could help your company improve your product offerings (rather than just make it harder for your customers to cancel).</p></li>
+<li><p>Asking questions about the <em>data</em>. Where did the data come from? Is the source of the data trustworthy? Is the data relevant to the question being asked, as well as any future setting to which the results might be applied? What do the values contained within the data actually correspond to in the real world? These questions are a great way to catch inconsistencies and errors that might otherwise derail your analysis. Try to imagine yourself being physically present during data collection. What potential issues might arise? Whenever possible, do the “shoe-leather” work <span class="citation" data-cites="freedman_statistical_1991">(<a href="#ref-freedman_statistical_1991" role="doc-biblioref">Freedman 1991</a>)</span>.</p></li>
+<li><p>Asking questions about the <em>analysis, algorithms,</em> and <em>results</em>. What do these results mean in the context of reality? Do they make sense? Do the analysis and algorithms involve making any assumptions about the data or domain? Are these assumptions reasonable? Do these results answer the primary project question? Are the results being communicated accurately?</p></li>
+</ul>
+<p>In addition to these questions, it is important to keep an eye out for confirmation bias and desirability bias. <strong>Confirmation bias</strong> occurs when you fail to critically scrutinize results because they match what you expect to find. As human beings, we’re a lot more likely to double-check and scrutinize our results when they <em>don’t</em> match our expectations (which means that we’re a lot less likely to catch errors when the results match what we expect). <strong>Desirability bias</strong> occurs when you try to find the results that you think <em>other people</em> (or popular opinion) expect you to find.</p>
+<p>What can you do to diminish the risks of confirmation and desirability bias? While it’s impossible to let go of your expectations entirely, you <em>can</em> work on developing a healthy skepticism of <em>every result</em> that you obtain, regardless of whether it matches what you or other people expected or wanted to find.</p>
+<section id="case-study-estimating-animal-deaths-caused-by-the-2019-australian-bushfires" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="case-study-estimating-animal-deaths-caused-by-the-2019-australian-bushfires"><span class="header-section-number">1.2.1</span> Case Study: Estimating Animal Deaths Caused by the 2019 Australian Bushfires</h3>
+<p>Let’s use our critical thinking skills to do some detective work using an example that comes from the horrific bushfires that ravaged over 42 million acres of the east coast of Australia for many months during late 2019 and into 2020 (to put this in perspective, this is an area larger than the <em>entire state of Florida</em>). A number of scientists (the most prominent of whom was Professor Chris Dickman at the University of Sydney, who has over 30 years of experience working on the ecology, conservation, and management of Australian mammals) estimated that “over 1 billion animals perished in the fires.” That number, 1 billion, is absolutely staggering. While most people will accept reports of scientific studies without question, we are not most people. Let’s spend some time thinking critically about where this mind-boggling number, 1 billion, might have come from (not to downplay the undeniably horrific consequences of these fires, but rather, to better understand them).</p>
+<section id="asking-questions-about-the-data" class="level4" data-number="1.2.1.1">
+<h4 data-number="1.2.1.1" class="anchored" data-anchor-id="asking-questions-about-the-data"><span class="header-section-number">1.2.1.1</span> Asking Questions about the Data</h4>
+<p>How do you think the data that underlies the statement that “1 billion animals perished in the fires” was collected? Was there a team of scientists manually counting every single animal that died? Does the term “animal” include insects, such as ants and flies? Fortunately, with a little bit of research, we were able to find answers to these questions fairly quickly. We encourage you to try to answer any questions of your own too. A quick internet search led us to a news article <span class="citation" data-cites="university_of_sydney_more_2020">(<a href="#ref-university_of_sydney_more_2020" role="doc-biblioref">University of Sydney 2020</a>)</span>, stating that Professor Dickman based his estimations on a detailed study by <span class="citation" data-cites="johnson_impacts_2007">Johnson et al. (<a href="#ref-johnson_impacts_2007" role="doc-biblioref">2007</a>)</span> (13 years before the fires happened) on which Professor Dickman was a coauthor:</p>
+<blockquote class="blockquote">
+<p>“The figures quoted by Professor Dickman are based on a 2007 report for the World Wide Fund for Nature (WWF) on the impacts of land clearing on Australian wildlife in New South Wales... [which contained] estimates of mammal, bird and reptile population density in NSW” <span class="citation" data-cites="university_of_sydney_more_2020">(<a href="#ref-university_of_sydney_more_2020" role="doc-biblioref">University of Sydney 2020</a>)</span>.</p>
+</blockquote>
+<p>PDF copies of both of these articles <span class="citation" data-cites="johnson_impacts_2007">(<a href="#ref-johnson_impacts_2007" role="doc-biblioref">Johnson et al. 2007</a>)</span> and <span class="citation" data-cites="university_of_sydney_more_2020">(<a href="#ref-university_of_sydney_more_2020" role="doc-biblioref">University of Sydney 2020</a>)</span> are provided in the <em>bushfires/</em> folder of the <a href="https://github.com/Yu-Group/vds-book-supplementary">supplementary GitHub repository</a> for the interested reader.</p>
+<p>What we found in our literature search is that these estimates were based on data collected in 2007, and further reading revealed that this study only covered a small region of the state of New South Wales. The report from <span class="citation" data-cites="university_of_sydney_more_2020">University of Sydney (<a href="#ref-university_of_sydney_more_2020" role="doc-biblioref">2020</a>)</span> also stated that “the figure includes mammals (excluding bats), birds and reptiles and does not include frogs, insects or other invertebrates.”</p>
+<p>From this information, we can conclude that these results were <em>not</em> based on some mystical database that contained information on all the animals that died in the fires, likely because no such data exists (and trying to imagine collecting such a dataset quickly leads us to conclude that it would be an impossible task). Although the data that underlies the results come from a verifiable and legitimate source (the 2007 study conducted by the World Wildlife Fund, a reputable organization), this doesn’t automatically mean that it is relevant to the question being asked. A lot can change in 13 years, and it is a big claim to say that the estimates collected from a small, localized habitat can be generalized to the entire region affected by the fires.</p>
+<p>The data that underlie this study is thus relevant, but there is no doubt that it is limited in scope. At the end of the day, Professor Dickman did his best with an existing dataset that he was already familiar with, given that there was no other relevant data available. Often, <em>the best data is just the data you have</em>.</p>
+</section>
+<section id="asking-questions-about-the-analysis" class="level4" data-number="1.2.1.2">
+<h4 data-number="1.2.1.2" class="anchored" data-anchor-id="asking-questions-about-the-analysis"><span class="header-section-number">1.2.1.2</span> Asking Questions about the Analysis</h4>
+<p>Given that the data was based only on a small, localized region, how did Professor Dickman and his collaborators use the data to approximate the number of animals that died across the entire affected region? From the <span class="citation" data-cites="university_of_sydney_more_2020">University of Sydney (<a href="#ref-university_of_sydney_more_2020" role="doc-biblioref">2020</a>)</span> report, we learn that</p>
+<blockquote class="blockquote">
+<p>“Estimates of mammal, bird, and reptile population density in NSW [were obtained by multiplying] the density estimates by the areas of vegetation approved to be cleared” <span class="citation" data-cites="university_of_sydney_more_2020">(<a href="#ref-university_of_sydney_more_2020" role="doc-biblioref">University of Sydney 2020</a>)</span>.</p>
+</blockquote>
+<p>We interpret this to mean that they took the 2007 estimates of animal densities and scaled up these numbers based on the size of the affected area. This approach obviously does not take into account differences in animal densities across the entire affected area, nor does it take into account how these densities may have changed over time. However, given that no additional data was available, what else could they do?</p>
+<p>While we can criticize other people’s data-driven conclusions all we want, in many cases they are the best (and often the only) figures available. When criticizing someone else’s study, always keep in mind that behind every data-driven conclusion is a well-intentioned human being with feelings (something that people often conveniently forget). In the case of Professor Dickman’s study, while perhaps we shouldn’t take the claims as a base truth (the authors themselves were very clear in their report that these are <em>rough estimates</em> and should not be taken literally), they do paint an impactful picture of the devastating consequences of the fires on the local animal populations given the information available. Moreover, this was the first high-profile study that even <em>attempted</em> to quantify the impact of the fires on the animal populations.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>By thinking critically about the numbers reported concerning the impact of these fires, we can gain a much clearer understanding of where they came from and how we should interpret them. In your own studies, our advice is to always <em>be transparent about the assumptions that underlie your data and results</em> and document them (publicly, if possible). Every data-driven result has caveats, and it is your job to ensure that your results are being interpreted as accurately as possible.</p>
+</section>
+</section>
+</section>
+<section id="sec-pcs" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="sec-pcs"><span class="header-section-number">1.3</span> Evaluating and Building Trustworthiness Using the PCS Framework</h2>
+<p>While these critical thinking questions help provide a general <em>qualitative</em> measure of the trustworthiness of data-driven results, it is often important to also provide <em>quantitative</em> measures. This is where the predictability, computability, and stability (PCS) principles come in. These principles were first introduced in <span class="citation" data-cites="yu_veridical_2020">Yu and Kumbier (<a href="#ref-yu_veridical_2020" role="doc-biblioref">2020</a>)</span>, but have been greatly expanded in this book.</p>
+<p>The PCS framework offers guidance and techniques for empirically demonstrating that your results hold up to some predictability reality checks and stability evaluations that address various sources of uncertainty associated with your result. The three PCS principles are:</p>
+<ul>
+<li><p><strong>Predictability</strong>. Your conclusions are considered to be predictable if you can show that they reemerge in relevant future data and/or are in line with existing domain knowledge. Predictability evaluations can be thought of as a reality check. We will expand on the predictability principle in <a href="#sec-predictability-intro" class="quarto-xref"><span class="quarto-unresolved-ref">sec-predictability-intro</span></a>.</p></li>
+<li><p><strong>Computability</strong>. Computability is the workhorse behind every data analysis, PCS evaluation, and simulation study. You typically don’t need to demonstrate that your results are <em>computable</em>; rather you will use computation to conduct and evaluate your analyses, as well as to create data-inspired simulations.</p></li>
+<li><p><strong>Stability</strong>. Your conclusions are considered stable if you can show that they remain fairly consistent when realistic perturbations (changes/modifications) are made to the underlying data, judgment calls, and algorithmic choices. Stability assessments can be thought of as a set of stress-test evaluations of the uncertainty that is associated with your data-driven results. We will expand on the stability principle in <a href="#sec-stability-perturbation" class="quarto-xref"><span class="quarto-unresolved-ref">sec-stability-perturbation</span></a>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p></li>
+</ul>
+<div id="box-pcs" class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Box&nbsp;1.2: The PCS Framework
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The predictability, computability, and stability (PCS) framework provides guidelines for empirically evaluating the trustworthiness of evidence obtained from data at every step of the data science life cycle. Implementing the PCS principles involves using computational explorations to ensure that your results are predictable and stable.</p>
+</div>
+</div>
+<p>Predictability and stability assessments are a powerful means of providing <em>evidence</em> for the trustworthiness of your data-driven results. They do not, however, allow you to <em>prove</em> that your data-driven results are trustworthy. Absolute proof would require completely exhaustive predictability and stability assessments that consider <em>all</em> possible alternative data and analytic scenarios—an impossible task. These ideas contain echoes of “Popperian falsification,” as defined by the philosopher Karl Popper in the 1930s <span class="citation" data-cites="popper_logic_2002">(<a href="#ref-popper_logic_2002" role="doc-biblioref">Popper 2002</a>)</span>. Popperian falsification<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> states that a scientific finding is never really proven, but rather, every positive experimental result demonstrates further evidence for the scientific finding.</p>
+<p>While the PCS framework itself is new, many of the ideas that underlie it are not. The PCS framework aims to unify, streamline, and expand on the existing best practices and ideas from ML, statistics, and science.</p>
+<section id="sec-predictability-intro" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="sec-predictability-intro"><span class="header-section-number">1.3.1</span> Predictability</h3>
+<p>Scientists have been conducting <em>predictability</em> reality checks for centuries. For instance, in the early 1800s, Carl Friedrich Gauss developed a model for predicting the location of the asteroid Ceres in the sky, and he checked his model (i.e., he showed that it generated predictable results) by demonstrating that it accurately predicted Ceres’s actual future location. In a more modern setting, the ML community has long been demonstrating predictability by evaluating their algorithm’s performance on withheld validation and test sets. The PCS framework’s predictability principle expands the role of domain knowledge and the use of a validation set broadly, beyond just prediction problems.</p>
+<div id="box-predictability" class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Box&nbsp;1.3: Predictability
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Data-driven results are predictable if they can be shown to reemerge in (i.e., can be generalized to) new, relevant scenarios. Strong evidence of predictability can be obtained by demonstrating that the results hold in the context of the actual future or external data to which you will be applying your results. In the absence of available future/external data, a validation set surrogate can be used to evaluate the results. Additional evidence of predictability can be obtained by demonstrating that your analyses and algorithms are capable of uncovering results and relationships that are well known in the domain field.</p>
+</div>
+</div>
+<p>The most powerful predictability evaluation technique, however, involves demonstrating that your results reemerge in the context of the actual external or future data to which you will be applying them. For instance, if you have developed an algorithm for predicting stock prices (based on past stock market data) and you want to use your algorithm to predict future stock prices, you should show that your algorithm generates accurate predictions for stock market data that spans a time period that takes place <em>after</em> that of the data originally used to “train” your algorithm. As another example, imagine that you are conducting an analysis to try and understand hospital-acquired infection risk factors using data collected from patients in the hospital where you work. If you intend to apply your findings to patients from other hospitals, then you should demonstrate that the risk factors that you identified are relevant to patients in other hospitals too.</p>
+<p>However, there are many situations where you don’t have access to any external or future data that reflects the scenario in which you intend to apply your results or algorithms. In these situations, you can emulate future or external data by withholding some of your original data <em>before conducting your analysis</em> for the sole purpose of evaluating the predictability of your results. This withheld data can serve as a <em>surrogate</em> for future data (see <a href="#sec-train-val-test" class="quarto-xref"><span class="quarto-unresolved-ref">sec-train-val-test</span></a>). Additional evidence of the predictability of your results can be obtained from demonstrating that your analyses and algorithms are capable of capturing results and relationships that are well known in the domain field (see <a href="#sec-domain-evidence" class="quarto-xref"><span class="quarto-unresolved-ref">sec-domain-evidence</span></a>).</p>
+<section id="sec-train-val-test" class="level4" data-number="1.3.1.1">
+<h4 data-number="1.3.1.1" class="anchored" data-anchor-id="sec-train-val-test"><span class="header-section-number">1.3.1.1</span> The Training, Validation, and Test Datasets</h4>
+<p>In the absence of available future/external data, the recommended technique for generating surrogate external/future datasets is to split your data into a <em>training</em> set and a <em>validation</em> set (and possibly also a <em>test</em> set), as is common in the ML community.</p>
+<p>The <strong>training set</strong> (training data/training dataset) is the biggest portion of the data (which should contain at least 50 percent of the original data; we often use 60 percent), and this is the data that you will use to conduct your explorations, analyses, and to <em>train</em> your algorithms.</p>
+<p>The purpose of the <strong>validation set</strong> (validation data/validation dataset) (we typically use 20 percent to 40 percent of the original data, depending on whether we are also creating a test dataset) is to provide an independent assessment of your results or algorithms: that is, to demonstrate that your results reemerge (or your algorithms perform well) in data that resembles the future data to which your results will be applied. The validation dataset should thus be created in such a way that best reflects actual external or future data on which your results might be used to conduct real-world decision making. Often, the validation dataset results will be used to decide between several alternative analyses or algorithms or to filter out poorly performing algorithms (this is particularly common in prediction problems). In that case, since your validation dataset has then been used to produce your final results, it becomes important to use <em>another</em> withheld dataset to provide an independent evaluation of your final results.</p>
+<p>This is where the <strong>test set</strong> (test data/test dataset) comes in. The test set will consist of the remaining data that has not been used in the training or validation datasets, which is typically 20 percent of the original data. The test dataset can be used to provide a final independent assessment of an algorithm that was chosen based on the validation set performance. Similar to the validation dataset, the test dataset should resemble the future data to which your results will be applied as closely as possible.</p>
+<p>If you will be using validation (and test) sets to evaluate your data-driven results, it is important that you set aside these subsets of your data <em>before</em> you start conducting your analyses.</p>
+<div id="box-validation-set" class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Box&nbsp;1.4: The Roles of the Training, Validation, and Test Datasets
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you do not have access to future/external data to use for predictability evaluation, you can split your current data into two or three parts.</p>
+<p>The first part is the training data (often around 60 percent of the original data), which is used for exploring underlying patterns and relationships in the data and training algorithms.</p>
+<p>The second part is the validation data (often around 20 percent to 40 percent of the original data), which is used to evaluate the results and algorithms by serving as a surrogate for future data.</p>
+<p>If you will be using the validation dataset to compare multiple alternative analyses or algorithms to choose the final results, then an additional test dataset (often around 20 percent of the original data) should be set aside to provide an additional layer of independent scrutinization of the final results. The test set serves as a final surrogate for future data.</p>
+<p>The data should be split in such a way (e.g., using a random, group-based, or time-based split) that the relationship between the training data and the testing and validation data reflects the relationship between the current and future data to which the results and algorithms will be applied.</p>
+</div>
+</div>
+<p>If you are splitting your data into training, validation, and test datasets, you should do so in such a way that the validation and test datasets reflect the future/external data to which you intend to apply your results. Common splitting mechanisms include the following:</p>
+<ul>
+<li><p><strong>Time-based split</strong>: If your data was collected over time and you will be applying an algorithm that you have trained to future data, then a train/validation/test split that uses the <em>earliest</em> 60 percent of your original data as the training dataset, and evenly splits the later 40 percent of your data between the validation and test sets is a good representation of the relationship between the current and future data. For example, if you have 10 years of stock market data, you could use the stock prices from the first 6 years as your training data and then use stock prices from the final 4 years for the validation and test datasets for evaluation. In practice, however, after you have conducted your evaluations, you may want to re-train your algorithm using all of the available data to ensure that your algorithm is capturing the most up-to-date trends possible.</p></li>
+<li><p><strong>Group-based split</strong>: If your data has a natural grouping (e.g., if your data consists of information from patients from several different hospitals), and you will be applying an algorithm that you train to a new group of data points (e.g., to patients in a different hospital), then you might want to choose a random subset of 60 percent of the <em>groups</em> (e.g., hospitals, rather than patients) to form the training dataset, and then evenly split the remaining groups (e.g., hospitals) between the validation and test datasets. This ensures that every data point from the same group will be contained entirely within the training dataset, the validation dataset, <em>or</em> the test dataset, rather than split across them, and best reflects the process of applying the algorithm to data points in a new group (e.g., patients in a new hospital).</p></li>
+<li><p><strong>Random split</strong>: Using a purely random split to form the validation and test datasets (i.e., randomly selecting two sets of 20 percent of the data points to form the validation and test datasets) is reasonable when the current data points are all more or less <em>exchangeable</em> with one another (e.g., when people are randomly included in a survey), and the new data points to which you will be applying your results are similar to the current data points (e.g., you will be generalizing your results to other people who were not included in the survey, but could have been).</p></li>
+</ul>
+<p>Regardless of the type of split you choose, you should always justify why your choice provides a good surrogate for the relevant future (or external) data using domain knowledge, your understanding of the data collection process, and how your results or algorithms will be used (e.g., what kind of future data they will be applied to).</p>
+<p>Note that there is no specific need to feel tied to the 60/40 train/validation split (or 60/20/20 train/validation/test split): you can choose whichever proportions you feel comfortable with, although we recommend creating a training dataset that contains at least 50 percent of your data.</p>
+<p>As a reminder, it is strongly recommended that you split your data into training, validation, and test datasets <em>before</em> you start exploring and analyzing your data (although it is all right to do some light explorations before splitting your data to get a sense of the data structure). Splitting your data in the very early stages of your project will help prevent <strong>data leakage</strong>, where information from your training dataset “leaks” into your validation and test sets (and vice versa), impairing the ability of the validation and test sets to meaningfully act as a reasonable surrogate of truly independent future or external data <span class="citation" data-cites="kaufman_leakage_2012">(<a href="#ref-kaufman_leakage_2012" role="doc-biblioref">Kaufman et al. 2012</a>)</span>.</p>
+<p>It is thus important to make a plan for how you will evaluate the predictability of your results very early in your project (ideally as soon as you have collected your data).</p>
+</section>
+<section id="sec-domain-evidence" class="level4" data-number="1.3.1.2">
+<h4 data-number="1.3.1.2" class="anchored" data-anchor-id="sec-domain-evidence"><span class="header-section-number">1.3.1.2</span> The Role of Domain Evidence in Demonstrating Predictability</h4>
+<p>While we will primarily use external/validation data to evaluate the predictability of our results, another technique that we will sometimes use to demonstrate the predictability of our results is to show that our analysis or algorithm uncovers well-established patterns or relationships in the domain field (e.g., from reputable peer-reviewed research articles).</p>
+<p>For instance, if we develop an algorithm for identifying associations between genotypes (genes) and phenotypes (physical traits), and we can show that our algorithm is able to uncover known genotype-phenotype relationships (e.g., our results show that a gene well-documented in the literature to be associated with having red hair is indeed associated with the red hair phenotype), then we can use this as evidence of the predictability of our algorithm, which in turn provides evidence of the trustworthiness of any new relationships that we identify. This is an example of using the principle of predictability as a reality check.</p>
+</section>
+</section>
+<section id="sec-stability-perturbation" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="sec-stability-perturbation"><span class="header-section-number">1.3.2</span> Stability</h3>
+<p>The second pillar of the PCS framework is stability. To understand the principle of stability, consider the following metaphor. For every photograph that you take, there are multiple plausible alternative photographs that you <em>could have</em> taken, but didn’t. For example, the photograph could have been taken 30 seconds later, or you could have been standing three paces to the left. The same is true of the data that we collect. For every dataset that we collect, there are many plausible alternative datasets that we could have collected, such as if someone else had recorded the measurements, if they had been measured on a different day, or if the measurements had been taken for a slightly different set of individuals.</p>
+<p>Our metaphor doesn’t stop at the stage of data collection though. After we take our photograph, there are many preprocessing filters that we can use to modify it, often with the goal of making the photograph look more like the real world that we see with our eyes. The processing choices that we make here are <strong>judgment calls</strong>. Therefore, for any given photo that we take, there are many alternative final products that we could plausibly end up with, resulting from taking a slightly different picture and/or using slightly different preprocessing techniques.</p>
+<p>The analogy in data science is that there are many alternative ways that we can choose to clean or preprocess our data (e.g., there are multiple ways to impute missing values) as well as analyze it (e.g., there may be multiple algorithms that perform the same task), resulting in a wide range of possible downstream results that we can obtain. The uncertainty that underlies the data collection procedure and the cleaning and analysis judgment calls that we make manifest as uncertainty in our results.</p>
+<p>For most data science projects, there is no single “correct” dataset to collect, nor is there a single “correct” way to clean or analyze it. Instead, there are many equivalent datasets that you could collect, many alternative data cleaning mechanisms that you could implement, and multiple analyses that you can conduct, each of which is equally justifiable using relevant domain knowledge. The question is: Across the spectrum of reasonable datasets, cleaning procedures, and analyses that we could have conducted, how variable are the alternative results that we could have obtained? If the answer is “very variable,” then our results are clearly very sensitive to the minute choices that were made during the process of generating them, and the question becomes: Should we trust that the particular set of results that we generated accurately reflect reality? We can find an approximate answer to this question by conducting a stability analysis.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>Like the predictability principle, the ideas that underlie the stability principle have a long history. Stability is an expansion of the concept of uncertainty assessment from classical statistics (as well as stability in numerical analysis and control theory). <strong>Uncertainty</strong>, in this context, refers to the ways in which our results might have looked different under various scenarios.</p>
+<p>The classical statistical view of uncertainty considers just <em>one</em> source of uncertainty based on asking how the results might look different had an alternative <em>random sample</em> been collected; that is, it only considers sample variability under a hypothetical data collection/sampling process. The veridical data science stability principle, however, considers a much broader range of sources of uncertainty, asking how the results might look different had alternative data been collected (in ways beyond alternative random samples), as well as if we had made alternative cleaning, preprocessing, and analysis judgment calls. The stability principle can thus be thought of as an expansion of the traditional concepts of statistical uncertainty, as well as statistical robustness, which focuses on finding statistical <em>parameter estimators</em> that are stable across a wide range of statistical data collection mechanisms and distributions.</p>
+<p>In this book, we primarily address three sources of uncertainty arising from three sources: (1) the data collection process using appropriate data perturbations; (2) the data cleaning and preprocessing judgment calls; and (3) the choice of algorithm used. If your results fall apart when you make alternative judgment calls at any of these stages, it indicates that they are <em>unstable</em>. The three uncertainty assessments that we focus on in this book are not exhaustive—there will always be additional sources of uncertainty that we have not considered. However, it would be impossible to address every potential source of uncertainty. Our goal is thus to evaluate a few different sources of uncertainty to provide multiple angles of evidence of the stability of our results.</p>
+<p>One way to investigate the uncertainty associated with the data collection is to recompute the results using slightly different perturbed versions of the data, where the perturbations are justified based on the original data collection process and are intended to represent potential alternative datasets that could have been created. Similarly, we can investigate the uncertainty associated with the judgment calls that we made when cleaning and preprocessing the data by comparing the results that are computed using alternative versions of the data that have been cleaned and preprocessed based on alternative judgment calls that we could have made (e.g., imputing missing values using the mean versus the median). If the alternative versions of the results are fairly similar to one another, this indicates that the uncertainty is not too extreme and that the results are fairly stable, which can be used as evidence of trustworthiness.</p>
+<div id="box-stab" class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Box&nbsp;1.5: Stability
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Data-driven results are stable if they tend not to change across reasonable alternative perturbations throughout the data science life cycle (DSLC). The goal of a PCS stability analysis is to try to explore many relevant sources of the uncertainty that is associated with our results; that is, the ways in which our results could plausibly have been different. While it would be impossible to explore all the uncertainty that is associated with each result, our goal is to assess the stability of our results across reasonable perturbations (justified using domain knowledge) to the data collection process, our own data cleaning and preprocessing judgment calls, and our algorithmic choices.</p>
+</div>
+</div>
+<p>Note that the <em>predictability</em> evaluation technique of evaluating the results using future data (or pseudo-future data, such as a validation set) can be viewed as a special case of evaluating the <em>stability</em> of the results to a perturbation of the data. Those familiar with ML may also recognize stability as a concept that is conceptually related to the tasks of <em>transfer learning</em> (including <em>domain adaptation</em>), in which an algorithm trained to solve a problem in one scenario is reappropriated to solve a problem in another scenario.</p>
+</section>
+<section id="sec-computability" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="sec-computability"><span class="header-section-number">1.3.3</span> Computability</h3>
+<p>While it doesn’t feature heavily in our discussions of the PCS framework, the pillar of <strong>computability</strong> plays a critical supporting role throughout all data analyses and PCS evaluations. Although the primary emphasis of this book is on real data analysis, the role of computability comes into the foreground in the context of data-inspired simulation studies, which is outside the scope of this book. Although we do not extensively discuss the principle of computability throughout this book, every time we use a computer to conduct an analysis or PCS evaluation, we strive to ensure that our computations are clear, efficient, scalable, and reproducible, which reflects the essence of the principle of computability.</p>
+</section>
+<section id="pcs-as-a-unification-of-cultures" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="pcs-as-a-unification-of-cultures"><span class="header-section-number">1.3.4</span> PCS as a Unification of Cultures</h3>
+<p>To wrap up this chapter, we offer a short discussion of the PCS principles as a unification and expansion of the formerly distinct <em>traditional statistical inference</em> culture and the <em>modern machine learning</em> culture outlined by <span class="citation" data-cites="breiman_statistical_2001">Breiman (<a href="#ref-breiman_statistical_2001" role="doc-biblioref">2001</a>)</span> (although his terminology differs from ours). The traditional statistical inference culture relates data-driven findings to the real world, asking about how much the results could change within the boundaries of how the data was generated (i.e., by investigating the uncertainty of the results stemming from the hypothetical random sampling data collection procedure), while the modern ML culture evaluates algorithmic findings by showing that they also work well when applied to withheld (validation set) data (i.e., by demonstrating the predictability of the results). In veridical data science, we expand, generalize, and unify these ideas from both cultures, while incorporating domain knowledge and taking into consideration the real-world scenarios in which our results will be applied. For a more in-depth discussion of how veridical data science expands and unifies Brieman’s two cultures, see our paper “The Data Science Process: One Culture” <span class="citation" data-cites="yu_data_2020">(<a href="#ref-yu_data_2020" role="doc-biblioref">Yu and Barter 2020</a>)</span>.</p>
+</section>
+</section>
+<section id="exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="true-or-false-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="true-or-false-exercises">True or False Exercises</h3>
+<p>For each question, specify whether the answer is true or false (briefly justify your answers).</p>
+<ol type="1">
+<li><p>Data is always a good approximation of reality.</p></li>
+<li><p>With training, it is possible to eliminate confirmation bias.</p></li>
+<li><p>Results computed from a dataset that is collected today may not apply to data that will be collected in the future, even if both datasets are collected using the same mechanism.</p></li>
+<li><p>As soon as your analysis provides an answer to your domain question, you have conclusively answered the question.</p></li>
+<li><p>There are multiple ways to demonstrate the predictability of your results.</p></li>
+</ol>
+</section>
+<section id="conceptual-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="conceptual-exercises">Conceptual Exercises</h3>
+<ol start="6" type="1">
+<li><p>Explain why a finding derived from data should be considered evidence rather than proof of a real-world phenomenon.</p></li>
+<li><p>Describe at least two sources of uncertainty that are associated with every data-driven result.</p></li>
+<li><p>Describe two techniques (quantitative or qualitative) that you can use to strengthen the evidence for the trustworthiness of a data-driven finding.</p></li>
+<li><p>List at least two reasons why Professor Dickman’s calculations might not perfectly reflect the true number of animals that perished in the Australian bushfires.</p></li>
+<li><p>Imagine that you had infinite resources (people, time, money, etc.) at your disposal. For the Australian bushfire example, describe the hypothetical data that you would collect and how you would collect it to answer the question of how many animals perished in the fires as accurately as possible. Be specific. What values would you measure, and how would you physically measure them? (Assume that you have access to a time machine and can travel back in time to the time period immediately following the fires to collect your data if you choose.)</p></li>
+<li><p>In your own words, briefly summarize the predictability and stability elements of PCS to a family member who completely lacks any technical expertise.</p></li>
+<li><p>What is the role of the validation dataset in assessing the predictability of a data-driven result?</p></li>
+<li><p>Describe one technique that you could use for assessing the stability of a data-driven result.</p></li>
+<li><p>Which splitting technique (group-based, time-based, or random) would be most appropriate for creating a training, validation, and test dataset split in each of the following scenarios:</p>
+<ol type="a">
+<li><p>Using historical weather data to develop a weather forecast algorithm</p></li>
+<li><p>Using data from children across 10 Californian schools to evaluate the relationship between class size and test scores in other schools in the state of California</p></li>
+<li><p>Using data from previous elections to develop an algorithm for predicting the results of an upcoming election</p></li>
+<li><p>Using data from a random subset of an online store’s visitors to identify which characteristics are associated with the visitor making a purchase.</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="reading-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="reading-exercises">Reading Exercises</h3>
+<p>PDF files containing each of the papers listed here can be found in the exercises/reading folder on the <a href="https://github.com/Yu-Group/vds-book-supplementary">supplementary GitHub repository</a>.</p>
+<ol start="15" type="1">
+<li><p>Read “Statistical Modeling: The Two Cultures” by Breiman (2001), and write a short summary of how it relates to the PCS framework. Don’t worry if this paper is a little bit too technical at this stage; feel free just skim it to get the big picture.</p></li>
+<li><p>Read “Veridical Data Science” by Yu and Kumbier (2020), our original paper presenting a high-level outline of the ideas underlying the veridical data science framework.</p></li>
+<li><p>Read “50 Years of Data Science” by Donoho (2017), and comment on the similarities and differences between Donoho’s perspectives and the perspectives we have presented in this book so far.</p></li>
+</ol>
+</section>
+<section id="case-study-exercises" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="case-study-exercises">Case Study Exercises</h3>
+<ol start="18" type="1">
+<li><p>Read the 2022 NBC News article “Chart: Remote Work is Disappearing as More People Return to the Office” by Joe Murphy (a PDF copy can be found in the <code>exercises/reading</code> folder on the <a href="https://github.com/Yu-Group/vds-book-supplementary">supplementary GitHub repository</a>, and the original article can be found <a href="https://www.nbcnews.com/data-graphics/data-remote-workers-declining-may-2022-rcna28499">here</a>). Then answer the following critical thinking questions:</p>
+<ol type="a">
+<li><p>What is the preliminary conclusion of the article?</p></li>
+<li><p>On what data is the conclusion based? How was this data collected?</p></li>
+<li><p>Is the data representative of the population of interest?</p></li>
+<li><p>List at least two assumptions that underlie the conclusion.</p></li>
+<li><p>Does the title accurately represent the findings of the study?</p></li>
+<li><p>Do you think that these results are (qualitatively) trustworthy? What additional evidence might you seek to determine whether the results are trustworthy?</p></li>
+</ol></li>
+</ol>
+</section>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-breiman_statistical_2001" class="csl-entry" role="listitem">
+Breiman, Leo. 2001. <span>“Statistical Modeling: <span>The</span> Two Cultures.”</span> <em>Statistical Science</em> 16 (3): 199–231.
+</div>
+<div id="ref-freedman_statistical_1991" class="csl-entry" role="listitem">
+Freedman, David A. 1991. <span>“Statistical Models and Shoe Leather.”</span> <em>Sociological Methodology</em> 21: 291–313.
+</div>
+<div id="ref-johnson_impacts_2007" class="csl-entry" role="listitem">
+Johnson, C, H Cogger, Christopher Dickman, and H Ford. 2007. <em>Impacts of <span>Landclearing</span>: <span>The</span> <span>Impacts</span> of the <span>Approved</span> <span>Clearing</span> of <span>Native</span> <span>Vegetation</span> on <span>Australian</span> <span>Wildlife</span> in <span>New</span> <span>South</span> <span>Wales</span></em>. World Wide Fund for Nature.
+</div>
+<div id="ref-kaufman_leakage_2012" class="csl-entry" role="listitem">
+Kaufman, Shachar, Saharon Rosset, Claudia Perlich, and Ori Stitelman. 2012. <span>“Leakage in Data Mining: <span>Formulation</span>, Detection, and Avoidance.”</span> <em>ACM Transactions on Knowledge Discovery from Data</em> 6 (4): 15:1–21.
+</div>
+<div id="ref-khalil_investigating_2020" class="csl-entry" role="listitem">
+Khalil, Ashraf, Soha Glal Ahmed, Asad Masood Khattak, and Nabeel Al-Qirim. 2020. <span>“Investigating Bias in Facial Analysis Systems: <span>A</span> Systematic Review.”</span> <em>IEEE Access</em> 8: 130751–61.
+</div>
+<div id="ref-popper_logic_2002" class="csl-entry" role="listitem">
+Popper, Karl. 2002. <em>The <span>Logic</span> of <span>Scientific</span> <span>Discovery</span></em>. 2nd ed. Routledge.
+</div>
+<div id="ref-university_of_sydney_more_2020" class="csl-entry" role="listitem">
+University of Sydney, News. 2020. <em>More <span>Than</span> <span>One</span> <span>Billion</span> <span>Animals</span> <span>Impacted</span> <span>In</span> <span>Australian</span> <span>Bushfires</span></em>.
+</div>
+<div id="ref-vernick_3_2020" class="csl-entry" role="listitem">
+Vernick, Daniel. 2020. <span>“3 <span>Billion</span> <span>Animals</span> <span>Harmed</span> by <span>Australia</span>’s <span>Fires</span>.”</span> World Wildlife Fund.
+</div>
+<div id="ref-yu_stability_2013" class="csl-entry" role="listitem">
+Yu, Bin. 2013. <span>“Stability.”</span> <em>Bernoulli</em> 19 (4): 1484–1500.
+</div>
+<div id="ref-yu_data_2020" class="csl-entry" role="listitem">
+Yu, Bin, and Rebecca Barter. 2020. <span>“The Data Science Process: <span>One</span> Culture.”</span> <em>Journal of the American Statistical Association</em> 115 (530): 672–74.
+</div>
+<div id="ref-yu_veridical_2020" class="csl-entry" role="listitem">
+Yu, Bin, and Karl Kumbier. 2020. <span>“Veridical Data Science.”</span> <em>Proceedings of the National Academy of Sciences</em> 117 (8): 3920–29.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>There is an entire ML field called <em>transfer learning</em> that is concerned with applying algorithms to related problems that are similar to (but not the same as) the current problem. This also includes domain adaptation that concerns itself with future data that is dissimilar to the current data.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This colloquial use of the term ”statistics” really means ”data analysis”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Later in 2020, a new WWF study (overseen by Professor Chris Dickman and led by Dr Lily Van Eeden) updated this figure to report that the number of animals that perished in the fires is likely closer to 3 billion, an even more devastating figure than previously reported <span class="citation" data-cites="vernick_3_2020">(<a href="#ref-vernick_3_2020" role="doc-biblioref">Vernick 2020</a>)</span>. This study broke this figure down into “143 million mammals, 2.46 billion reptiles, 180 million birds, and 51 million frogs.” This updated report demonstrates that the originally reported figures shouldn’t be taken literally, but instead, they serve to paint a general picture of the severity of the devastation on Australia’s eastern wildlife.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Note that predictability can be viewed as a special case of stability when the perturbation of the current data is the future data.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>In Popper’s philosophy, for a finding to be considered “scientific,” it must be “falsifiable”; that is, it must be possible to disprove it if indeed it is false.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>We formally introduced the stability principle in the context of statistical modeling in the paper “Stability” <span class="citation" data-cites="yu_stability_2013">(<a href="#ref-yu_stability_2013" role="doc-biblioref">Yu 2013</a>)</span> and the stability principle was expanded in the original “Veridical Data Science” article <span class="citation" data-cites="yu_veridical_2020">(<a href="#ref-yu_veridical_2020" role="doc-biblioref">Yu and Kumbier 2020</a>)</span>, and even further in this book.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a aria-label='Acknowledgments' class='pagination-link' href='/00-acknowledgements'>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Acknowledgments</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a aria-label='The Data Science Life Cycle' class='pagination-link' href='/02-dslc'>
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Data Science Life Cycle</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class='nav-link' href='/license'>
+<p>License</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Yu-Group/vds-book-supplementary" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
