@@ -1,11 +1,22 @@
 # STAT 215a (applied statistics) notes
 ### UC Berkeley, Fall 2026
 
-# Lecture 1
+# Lecture 3 (Sep 3 2026)
 
-AI stuff and boring intro stuff
+What do I think "scientific responsibility" means?
 
-# Lecture 2
+I think scientific responsibility is being honest about the limitations of your work, not cherry picking data without disclosure, being transparent about methods. The general public may not understand the nuances of your work, but they may follow the conclusions you draw. Scientific responsibility is ensuring that the conclusions that the public may draw from your work are not misleading. They look at "scientists" for the truth, so don't knowingly lead them away from that.
+
+Be open minded and embrace surprises. It's not about being right, it's about uncovering the truth.
+
+
+What about "Critical thinking"?
+
+Reasoning about things for yourself. Considering the facts/evidence and coming to your own conclusions.
+Understand your own bias. Avoid confirmation bias.
+
+
+# Lecture 2 (Sep 1 2026)
 
 Guest lecture with medical professional Aaron.
 
@@ -47,3 +58,9 @@ Example of Clinical Decision Instrument: [MD Calc Pecarn Website](https://www.md
 
 
 We will make a lot of small judgement calls in our data analysis. Document the judgement calls so we can justify them later.
+
+
+# Lecture 1 (Aug 27 2026)
+
+AI stuff and boring intro stuff
+
