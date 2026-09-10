@@ -1,6 +1,18 @@
 # STAT 215a (applied statistics) notes
 ### UC Berkeley, Fall 2026
 
+# Lecture 5 (Sep 10 2026)
+
+## Problem Formulation
+
+Not all domain problems need to be solved computationally. Lots of traders just go off of their gut, and are very successful.
+
+Who are the people this effects? Who are the 'patients' this problem serves? In other words: is this problem rooted in the real world, or is it fabricated and doesn't help anyone?
+
+#### Discussion:
+
+The readings present a practical and pragmatic stance on statistics and machine learning. Instead of using math headlessly to force it to model problems, ensure the problems you solve are appropriately grounded in the real world, and useful. It is better to have a model you don't understand that works, than a model that you do understand that doesn't actually help solve the problem and is not good at prediction.
+
 # Lecture 3 (Sep 3 2026)
 
 What do I think "scientific responsibility" means?
