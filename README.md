@@ -1,6 +1,24 @@
 # STAT 215a (applied statistics) notes
 ### UC Berkeley, Fall 2026
 
+# Discussion 3
+
+### Plotting tips
+
+Save as .svg for vector graphics (try not to use .png when importing into LaTeX).
+
+Make ticks point inwards, not outwards. Put ticks on all sides of the axes.
+
+plt.rcParams['xtick.direction'] = 'in'
+plt.rcParams['ytick.direction'] = 'in'
+plt.rcParams['xtick.top'] = True
+plt.rcParams['ytick.top'] = True
+
+If using colormaps, rainbow colormap can sometimes show artificial boundaries in the data.
+"Perceptually uniform" colormaps are usually better at seeing the difference between values in the colormap.
+Can include topographic lines on top of the colormap to show true boundaries in the data.
+
+
 # Lecture 5 (Sep 10 2026)
 
 ## Problem Formulation
